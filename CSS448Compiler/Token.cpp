@@ -36,6 +36,8 @@ Token::Token()
 	tokenClassLookup.push_back("OPERATOR_ASTERISK");
 	tokenClassLookup.push_back("OPERATOR_DIVISION");
 	tokenClassLookup.push_back("OPERATOR_PLUS");
+	tokenClassLookup.push_back("OPERATOR_DOT");
+	tokenClassLookup.push_back("OPERATOR_ARROW");
 	tokenClassLookup.push_back("OPERATOR_LEFT_SHIFT");
 	tokenClassLookup.push_back("OPERATOR_RIGHT_SHIFT");
 	tokenClassLookup.push_back("OPERATOR_LESS_THAN");
@@ -99,63 +101,7 @@ Token::Token(const Token& orig)
 	tokenColumnNumber = orig.tokenColumnNumber;
 
 	// Initialize the tokenClassLookup vector.
-	tokenClassLookup.push_back("ERROR");
-	tokenClassLookup.push_back("BLOCK_COMMENT");
-	tokenClassLookup.push_back("LINE_COMMENT");
-	tokenClassLookup.push_back("OPERATOR_MINUS");
-	tokenClassLookup.push_back("OPERATOR_EXCLAMATION_POINT");
-	tokenClassLookup.push_back("OPERATOR_TILDE");
-	tokenClassLookup.push_back("OPERATOR_ASTERISK");
-	tokenClassLookup.push_back("OPERATOR_DIVISION");
-	tokenClassLookup.push_back("OPERATOR_PLUS");
-	tokenClassLookup.push_back("OPERATOR_LEFT_SHIFT");
-	tokenClassLookup.push_back("OPERATOR_RIGHT_SHIFT");
-	tokenClassLookup.push_back("OPERATOR_LESS_THAN");
-	tokenClassLookup.push_back("OPERATOR_LESS_OR_EQUAL");
-	tokenClassLookup.push_back("OPERATOR_GREATER_THAN");
-	tokenClassLookup.push_back("OPERATOR_GREATER_OR_EQUAL");
-	tokenClassLookup.push_back("OPERATOR_EQUAL");
-	tokenClassLookup.push_back("OPERATOR_NOT_EQUAL");
-	tokenClassLookup.push_back("OPERATOR_AMPERSAND");
-	tokenClassLookup.push_back("OPERATOR_BITWISE_AND");
-	tokenClassLookup.push_back("OPERATOR_BITWISE_OR");
-	tokenClassLookup.push_back("OPERATOR_LOGICAL_AND");
-	tokenClassLookup.push_back("OPERATOR_LOGICAL_OR");
-	tokenClassLookup.push_back("OPERATOR_ASSIGNMENT");
-	tokenClassLookup.push_back("IDENTIFIER");
-	tokenClassLookup.push_back("CHARACTER_LITERAL");
-	tokenClassLookup.push_back("INTEGER");
-	tokenClassLookup.push_back("FLOAT_LEADING_DIGIT");
-	tokenClassLookup.push_back("FLOAT_LEADING_DECIMAL");
-	tokenClassLookup.push_back("FLOAT_NO_DECIMAL");
-	tokenClassLookup.push_back("STRING_LITERAL");
-	tokenClassLookup.push_back("LEFT_PAREN");
-	tokenClassLookup.push_back("RIGHT_PAREN");
-	tokenClassLookup.push_back("LEFT_BRACKET");
-	tokenClassLookup.push_back("RIGHT_BRACKET");
-	tokenClassLookup.push_back("LEFT_CURLY_BRACE");
-	tokenClassLookup.push_back("RIGHT_CURLY_BRACE");
-	tokenClassLookup.push_back("COMMA");
-	tokenClassLookup.push_back("SEMICOLON");
-	tokenClassLookup.push_back("WHITESPACE");
-	tokenClassLookup.push_back("KEYWORD_BYTE");
-	tokenClassLookup.push_back("KEYWORD_CONST");
-	tokenClassLookup.push_back("KEYWORD_ELSE");
-	tokenClassLookup.push_back("KEYWORD_END");
-	tokenClassLookup.push_back("KEYWORD_EXIT");
-	tokenClassLookup.push_back("KEYWORD_FLOAT64");
-	tokenClassLookup.push_back("KEYWORD_FOR");
-	tokenClassLookup.push_back("KEYWORD_FUNCTION");
-	tokenClassLookup.push_back("KEYWORD_IF");
-	tokenClassLookup.push_back("KEYWORD_INT32");
-	tokenClassLookup.push_back("KEYWORD_PRINT");
-	tokenClassLookup.push_back("KEYWORD_RECORD");
-	tokenClassLookup.push_back("KEYWORD_REF");
-	tokenClassLookup.push_back("KEYWORD_RETURN");
-	tokenClassLookup.push_back("KEYWORD_STATIC");
-	tokenClassLookup.push_back("KEYWORD_TYPE");
-	tokenClassLookup.push_back("KEYWORD_VAR");
-	tokenClassLookup.push_back("KEYWORD_WHILE");
+	tokenClassLookup = orig.tokenClassLookup;
 }
 
 Token::~Token() 

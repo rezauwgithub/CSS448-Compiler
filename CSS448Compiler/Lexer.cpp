@@ -52,6 +52,14 @@ Lexer::Lexer(const char* filePath)
 
 		file.open(filePath); //open for reading
 
+
+		//// debugging info:
+		//cout << "true: " << true << endl;
+		//cout << "false: " << false << endl;
+		//cout << "file open: " << file.is_open() << endl;
+		//cout << "file isgood: " << file.good() << endl;
+
+
 		bufferIndex = 0;
 
 		tokenize();

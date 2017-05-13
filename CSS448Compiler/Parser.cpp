@@ -309,29 +309,29 @@ bool Parser::Parameter()
 
 bool Parser::Parameter_1()
 {
-    term(KEYWORD_REF) && term(KEYWORD_CONST) && term(IDENTIFIER) 
+	return term(KEYWORD_REF) && term(KEYWORD_CONST) && term(IDENTIFIER)
             && Non_Array_Type_Descriptor() && Dimension_Wildcards();
 }
 
 bool Parser::Parameter_2()
 {
-    term(KEYWORD_CONST) && term(IDENTIFIER) && Non_Array_Type_Descriptor() 
+	return term(KEYWORD_CONST) && term(IDENTIFIER) && Non_Array_Type_Descriptor()
             && Dimension_Wildcards();
 }
 
 bool Parser::Parameter_3()
 {
-    term(IDENTIFIER) && Non_Array_Type_Descriptor() && Dimension_Wildcards();
+	return term(IDENTIFIER) && Non_Array_Type_Descriptor() && Dimension_Wildcards();
 }
 
 bool Parser::Parameter_4()
 {
-    term(IDENTIFIER) && Non_Array_Type_Descriptor();
+	return term(IDENTIFIER) && Non_Array_Type_Descriptor();
 }
 
 bool Parser::Parameter_5()
 {
-    term(KEYWORD_REF) && term(KEYWORD_CONST) && term(IDENTIFIER) && term(OPERATOR_ASSIGNMENT) 
+	return term(KEYWORD_REF) && term(KEYWORD_CONST) && term(IDENTIFIER) && term(OPERATOR_ASSIGNMENT)
             && Expression();
 }
 
@@ -360,32 +360,32 @@ bool Parser::Variable_Declaration()
 
 bool Parser::Variable_Declaration_1()
 {
-    term(KEYWORD_STATIC) && term(KEYWORD_CONST) && term(KEYWORD_VAR) && term(IDENTIFIER) && Type_Descriptor();
+	return term(KEYWORD_STATIC) && term(KEYWORD_CONST) && term(KEYWORD_VAR) && term(IDENTIFIER) && Type_Descriptor();
 }
 
 bool Parser::Variable_Declaration_2()
 {
-    term(KEYWORD_CONST) && term(KEYWORD_VAR) && term(IDENTIFIER) && Type_Descriptor();
+	return term(KEYWORD_CONST) && term(KEYWORD_VAR) && term(IDENTIFIER) && Type_Descriptor();
 }
 
 bool Parser::Variable_Declaration_3()
 {
-    term(KEYWORD_VAR) && term(IDENTIFIER) && Type_Descriptor();
+	return term(KEYWORD_VAR) && term(IDENTIFIER) && Type_Descriptor();
 }
 
 bool Parser::Variable_Declaration_4()
 {
-    term(KEYWORD_STATIC) && term(KEYWORD_CONST) && term(KEYWORD_VAR) && term(IDENTIFIER) && term(OPERATOR_EQUAL) && Expression();
+	return term(KEYWORD_STATIC) && term(KEYWORD_CONST) && term(KEYWORD_VAR) && term(IDENTIFIER) && term(OPERATOR_EQUAL) && Expression();
 }
 
 bool Parser::Variable_Declaration_5()
 {
-    term(KEYWORD_CONST) && term(KEYWORD_VAR) && term(IDENTIFIER) && term(OPERATOR_EQUAL) && Expression();
+	return term(KEYWORD_CONST) && term(KEYWORD_VAR) && term(IDENTIFIER) && term(OPERATOR_EQUAL) && Expression();
 }
 
 bool Parser::Variable_Declaration_6()
 {
-    term(KEYWORD_VAR) && term(IDENTIFIER) && term(OPERATOR_EQUAL) && Expression();
+    return term(KEYWORD_VAR) && term(IDENTIFIER) && term(OPERATOR_EQUAL) && Expression();
 
 }
 
