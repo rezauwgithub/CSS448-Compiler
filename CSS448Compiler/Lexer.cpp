@@ -40,15 +40,12 @@ const std::string Lexer::reservedWords[] = {
 
 Lexer::Lexer(const char* filePath)
 {
-
-
-
 	// Line and column numbers do not begin at zero, they begin at 1.
 	currentLineNumber = 1;
 	currentColumnNumber = 1;
 
-	try   //If file opens, tokenize
-	{
+	try   //If file opens, tokenize 
+        {
 
 		file.open(filePath); //open for reading
 
