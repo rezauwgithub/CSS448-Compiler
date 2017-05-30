@@ -248,6 +248,10 @@ bool Lexer::tokenize()
 	return true;
 }
 
+std::vector<Token> Lexer::getTokens() {
+	return tokens;
+}
+
 bool Lexer::getNextChar(char& current)
 {
 	//cout << "getNextChar()" << endl;
