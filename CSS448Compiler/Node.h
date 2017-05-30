@@ -17,6 +17,8 @@
 #include <string>
 #include "Token.h"
 
+static int x = 0;
+
 class Node{
 public:
     std::vector<Node*> children;
@@ -25,7 +27,24 @@ public:
 
     //int depth;
 	
+	//Node() {
+
+	//};
+
 	bool deleteChildren() {
+		cout << "---- " << this->expressionType << " deleted something:" << endl;
+		if (this->expressionType != "" && this->children.size() != 0) {
+			x = x + 1;
+			this->printSubtree(x);
+			x = 0;
+		}
+		//cout << "----DONE----" << endl;
+
+
+		//if (this->expressionType == "Program") {
+		//	cout << "Oh shit!" << endl;
+		//	
+		//}
 		
 		int i = children.size() - 1;
 		while (i >= 0) {
@@ -40,7 +59,7 @@ public:
 		return false;
 	};
 	
-	void PrintSubtree(int currentIndent) {
+	void printSubtree(int currentIndent) {
 		if (children.empty()) {
 			for (int j = 0; j < currentIndent; j++) {
 				cout << "\t";
@@ -55,7 +74,7 @@ public:
 			cout << this->expressionType << endl;
 
 			for (int i = 0; i < children.size(); i++) {
-				children[i]->PrintSubtree(currentIndent + 1);
+				children[i]->printSubtree(currentIndent + 1);
 			}
 		}
 	};

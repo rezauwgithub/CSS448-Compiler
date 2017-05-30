@@ -37,9 +37,11 @@ int main(int argc, char** argv) {
 
     Lexer lex(myFilePath);
 
-	Parser parser;
-	parser.readInTokens(lex.getTokens());
 
+
+	Parser parser;
+	parser.parseTokens(lex.getTokens());
+	parser.printTree();
 
 
     return 0;

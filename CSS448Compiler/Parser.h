@@ -24,13 +24,15 @@ public:
     
 
 	std::vector<Token> tokens;
-	void readInTokens(std::vector<Token>);
-	
+	void parseTokens(std::vector<Token>);
+	void printTree();
 
     
 private:
 	std::vector<Token>::iterator nextToken;
 	Node*   parseTreeRoot;
+
+	void readInTokens(std::vector<Token>);
 
     /**********************/
     /**      GRAMMAR     **/
@@ -38,141 +40,141 @@ private:
         bool match(TokenClass); // TODO: remove
 		bool match(Node*, TokenClass);
         
-        bool Program();        
-        
-        bool Statements();
-            bool Statements_1();
-            bool Statements_2();
-        
-        bool Statement();
-        
-        bool Declaration_Statement();
-        
-        bool Type_Declaration();       
-        
-        bool Type_Descriptor();
-            bool Type_Descriptor_1();
-            bool Type_Descriptor_2();     
-            
-        bool Non_Array_Type_Descriptor();
-        bool Record_Descriptor();
-        
-        bool Multiple_Field_Declarations();
-            bool Multiple_Field_Declarations_1();
-            bool Multiple_Field_Declarations_2();    
-            
-        bool Field_Declarations();
-            bool Field_Declarations_1();
-            bool Field_Declarations_2();
-            bool Field_Declarations_3();
-            
-        bool Field_Declaration();
-        
-        bool Basic_Type();
-        
-        bool Dimension();
-        
-        bool Function_Declaration();
-            bool Function_Declaration_1();
-            bool Function_Declaration_2();
-            bool Function_Declaration_3();  
-            
-        bool Parameters();
-            bool Parameters_1();
-            bool Parameters_2();    
-            bool Parameters_3();
-            
-        bool Parameter();
-            bool Parameter_1();
-            bool Parameter_2();
-            bool Parameter_3();
-            bool Parameter_4();
-            bool Parameter_5();
+		bool Program(Node*);
 
-        bool Dimension_Wildcards();
-        
-        bool Dimension_Args();
+		bool Statements(Node*);
+		bool Statements_1(Node*);
+		bool Statements_2(Node*);
 
-        bool Variable_Declaration();
-            bool Variable_Declaration_1();
-            bool Variable_Declaration_2();
-            bool Variable_Declaration_3();
-            bool Variable_Declaration_4();
-            bool Variable_Declaration_5();
-            bool Variable_Declaration_6();
-            
-        bool Block_Statement();
-                    
-        bool For_Statement();
-        
-        bool While_Statement();
-        
-        bool If_Statement();
-            bool If_Statement_1();
-            bool If_Statement_2();
-            
-        bool Print_Statement();
-        
-        bool Return_Statement();
-            bool Return_Statement_1();
-            bool Return_Statement_2();
-            
-        bool Exit_Statement();
-            bool Exit_Statement_1();
-            bool Exit_Statement_2();
-            
-        bool Expression_Statement();
-        
-        bool Expressions();
-            bool Expressions_1();
-            bool Expressions_2();
+		bool Statement(Node*);
 
-        bool Expression();
-            bool Expression_1();
-            bool Expression_2();
-            bool Expression_3();
-            bool Expression_4();
-            bool Expression_5();
-            bool Expression_6();
-            bool Expression_7();
-            bool Expression_8();
-            bool Expression_9();
-            
-        bool Additional_Expression();
-            bool Additional_Expression_1();
-            bool Additional_Expression_2();
-            bool Additional_Expression_3();
-            bool Additional_Expression_4();
-            bool Additional_Expression_5();
-            bool Additional_Expression_6();
-            bool Additional_Expression_7();
-            bool Additional_Expression_8();
-            bool Additional_Expression_9();
-            bool Additional_Expression_10();
-            bool Additional_Expression_11();
-            bool Additional_Expression_12();
-            bool Additional_Expression_13();
-            bool Additional_Expression_14();
-            bool Additional_Expression_15();
-            bool Additional_Expression_16();
-            
-        bool Type_Cast();
-        
-        bool Function_Call();
-            bool Function_Call_1();
-            bool Function_Call_2();
-            
-        bool Variable();
-            bool Variable_1();
-            bool Variable_2();
-            
-        bool Additional_Variables();
-            bool Additional_Variables_1();
-            bool Additional_Variables_2();
-            
-        bool Subscript();
-        
-        bool Number();  
+		bool Declaration_Statement(Node*);
+
+		bool Type_Declaration(Node*);
+
+		bool Type_Descriptor(Node*);
+		bool Type_Descriptor_1(Node*);
+		bool Type_Descriptor_2(Node*);
+
+		bool Non_Array_Type_Descriptor(Node*);
+		bool Record_Descriptor(Node*);
+
+		bool Multiple_Field_Declarations(Node*);
+		bool Multiple_Field_Declarations_1(Node*);
+		bool Multiple_Field_Declarations_2(Node*);
+
+		bool Field_Declarations(Node*);
+		bool Field_Declarations_1(Node*);
+		bool Field_Declarations_2(Node*);
+		bool Field_Declarations_3(Node*);
+
+		bool Field_Declaration(Node*);
+
+		bool Basic_Type(Node*);
+
+		bool Dimension(Node*);
+
+		bool Function_Declaration(Node*);
+		bool Function_Declaration_1(Node*);
+		bool Function_Declaration_2(Node*);
+		bool Function_Declaration_3(Node*);
+
+		bool Parameters(Node*);
+		bool Parameters_1(Node*);
+		bool Parameters_2(Node*);
+		bool Parameters_3(Node*);
+
+		bool Parameter(Node*);
+		bool Parameter_1(Node*);
+		bool Parameter_2(Node*);
+		bool Parameter_3(Node*);
+		bool Parameter_4(Node*);
+		bool Parameter_5(Node*);
+
+		bool Dimension_Wildcards(Node*);
+
+		bool Dimension_Args(Node*);
+
+		bool Variable_Declaration(Node*);
+		bool Variable_Declaration_1(Node*);
+		bool Variable_Declaration_2(Node*);
+		bool Variable_Declaration_3(Node*);
+		bool Variable_Declaration_4(Node*);
+		bool Variable_Declaration_5(Node*);
+		bool Variable_Declaration_6(Node*);
+
+		bool Block_Statement(Node*);
+
+		bool For_Statement(Node*);
+
+		bool While_Statement(Node*);
+
+		bool If_Statement(Node*);
+		bool If_Statement_1(Node*);
+		bool If_Statement_2(Node*);
+
+		bool Print_Statement(Node*);
+
+		bool Return_Statement(Node*);
+		bool Return_Statement_1(Node*);
+		bool Return_Statement_2(Node*);
+
+		bool Exit_Statement(Node*);
+		bool Exit_Statement_1(Node*);
+		bool Exit_Statement_2(Node*);
+
+		bool Expression_Statement(Node*);
+
+		bool Expressions(Node*);
+		bool Expressions_1(Node*);
+		bool Expressions_2(Node*);
+
+		bool Expression(Node*);
+		bool Expression_1(Node*);
+		bool Expression_2(Node*);
+		bool Expression_3(Node*);
+		bool Expression_4(Node*);
+		bool Expression_5(Node*);
+		bool Expression_6(Node*);
+		bool Expression_7(Node*);
+		bool Expression_8(Node*);
+		bool Expression_9(Node*);
+
+		bool Additional_Expression(Node*);
+		bool Additional_Expression_1(Node*);
+		bool Additional_Expression_2(Node*);
+		bool Additional_Expression_3(Node*);
+		bool Additional_Expression_4(Node*);
+		bool Additional_Expression_5(Node*);
+		bool Additional_Expression_6(Node*);
+		bool Additional_Expression_7(Node*);
+		bool Additional_Expression_8(Node*);
+		bool Additional_Expression_9(Node*);
+		bool Additional_Expression_10(Node*);
+		bool Additional_Expression_11(Node*);
+		bool Additional_Expression_12(Node*);
+		bool Additional_Expression_13(Node*);
+		bool Additional_Expression_14(Node*);
+		bool Additional_Expression_15(Node*);
+		bool Additional_Expression_16(Node*);
+
+		bool Type_Cast(Node*);
+
+		bool Function_Call(Node*);
+		bool Function_Call_1(Node*);
+		bool Function_Call_2(Node*);
+
+		bool Variable(Node*);
+		bool Variable_1(Node*);
+		bool Variable_2(Node*);
+
+		bool Additional_Variables(Node*);
+		bool Additional_Variables_1(Node*);
+		bool Additional_Variables_2(Node*);
+
+		bool Subscript(Node*);
+
+		bool Number(Node*);
 };
 
 #endif /* PARSER_H */

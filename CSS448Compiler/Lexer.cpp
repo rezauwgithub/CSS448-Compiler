@@ -170,10 +170,21 @@ bool Lexer::tokenize()
 			}
 		}
 
-		tokens.push_back(curToken);
+		// do not print WHITESPACE, BLOCK_COMMENT or LINE_COMMENT tokens.
+		switch (curToken.getTokenClass()) {
+		case WHITESPACE:
+		case BLOCK_COMMENT:
+		case LINE_COMMENT:
+			break;
+		default:
+			tokens.push_back(curToken);
+			break;
+		}
 
 		// Erase the token's characters from the buffer.
-		buffer.erase(buffer.begin(), buffer.begin() + curToken.getLength());
+		if (buffer.size() > 0) {
+			buffer.erase(buffer.begin(), buffer.begin() + curToken.getLength());
+		}
 		// set the buffer index back to the beginning
 		bufferIndex = 0;
 
@@ -228,6 +239,10 @@ bool Lexer::tokenize()
 		}
 	}
 
+	if (tokens[tokens.size() - 1].getTokenClass() == ERROR) {
+		tokens.pop_back();
+	}
+
 	for (int i = 0; i < tokens.size(); i++) {
 
 		Token t = tokens[i];
@@ -240,7 +255,8 @@ bool Lexer::tokenize()
 			//cout << t << endl; // for debugging only
 			break;
 		default:
-			cout << t << " Operation Precedence: " << t.getPrecedence() << endl;
+			//cout << t << " Operation Precedence: " << t.getPrecedence() << endl;
+			cout << t << endl;
 			break;
 		}
 	}
