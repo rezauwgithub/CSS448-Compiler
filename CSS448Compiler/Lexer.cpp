@@ -72,7 +72,7 @@ Lexer::Lexer(const char* filePath)
 bool Lexer::tokenize()
 {
 	//Daniel M's switch statement code (which calls getNextChar())
-	//Creates all tokens and populates token queue
+	//Creates all tokens and populates token vector
 
 	while (!file.eof()) {
 		// save the line and column number of the start of the token
@@ -170,7 +170,7 @@ bool Lexer::tokenize()
 			}
 		}
 
-		tokens.push(curToken);
+		tokens.push_back(curToken);
 
 		// Erase the token's characters from the buffer.
 		buffer.erase(buffer.begin(), buffer.begin() + curToken.getLength());
@@ -228,8 +228,11 @@ bool Lexer::tokenize()
 		}
 	}
 
-	while (tokens.size() > 0) {
-		Token t = tokens.front();
+
+
+	for (int i = 0; i < tokens.size(); i++) {
+
+		Token t = tokens[i];
 
 		// do not print WHITESPACE, BLOCK_COMMENT or LINE_COMMENT tokens.
 		switch (t.getTokenClass()) {
@@ -242,10 +245,14 @@ bool Lexer::tokenize()
 			cout << t << " Operation Precedence: " << t.getPrecedence() << endl;
 			break;
 		}
-		tokens.pop();
 	}
 
+
 	return true;
+}
+
+std::vector<Token> Lexer::getTokens() {
+	return tokens;
 }
 
 bool Lexer::getNextChar(char& current)

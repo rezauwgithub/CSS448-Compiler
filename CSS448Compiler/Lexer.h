@@ -18,7 +18,7 @@
 #include <iostream>
 #include <string>
 
-#include <queue>
+#include <vector>
 #include <deque>
 
 #include "Token.h"
@@ -29,8 +29,9 @@ public:
     Lexer(const char* fileName);
     bool getNextChar(char& current); // write the next char into current. Return false if EOF
 	bool backUp1Char();
-    std::queue<Token> tokens;
+    std::vector<Token> tokens;
 	Token createNextToken();
+	std::vector<Token> getTokens();
 
 private:
 
