@@ -16,22 +16,27 @@
 
 #include "Lexer.h"
 #include "Token.h"
+#include "Node.h"
 
 class Parser{
 public:
-    Parser(std::queue<Token>);
+    Parser();
     
-    
-    
+
+	std::vector<Token> tokens;
+	void readInTokens(std::vector<Token>);
+	
 
     
 private:
-    Token* nextToken;
-    
+	std::vector<Token>::iterator nextToken;
+	Node*   parseTreeRoot;
+
     /**********************/
     /**      GRAMMAR     **/
     /**********************/
-        bool match(TokenClass);
+        bool match(TokenClass); // TODO: remove
+		bool match(Node*, TokenClass);
         
         bool Program();        
         

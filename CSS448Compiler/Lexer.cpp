@@ -228,8 +228,6 @@ bool Lexer::tokenize()
 		}
 	}
 
-
-
 	for (int i = 0; i < tokens.size(); i++) {
 
 		Token t = tokens[i];
@@ -247,12 +245,7 @@ bool Lexer::tokenize()
 		}
 	}
 
-
 	return true;
-}
-
-std::vector<Token> Lexer::getTokens() {
-	return tokens;
 }
 
 bool Lexer::getNextChar(char& current)

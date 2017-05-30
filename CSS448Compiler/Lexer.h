@@ -33,6 +33,7 @@ public:
 	Token createNextToken();
 	std::vector<Token> getTokens();
 
+
 private:
 
 	const static std::string reservedWords[]; 

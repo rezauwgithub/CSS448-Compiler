@@ -16,6 +16,7 @@
 #include <iostream>
 #include <string>
 #include "Lexer.h"
+#include "Parser.h"
 
 
 using namespace std;
@@ -35,5 +36,11 @@ int main(int argc, char** argv) {
 	cout << "Input file path: " << myFilePath << endl;
 
     Lexer lex(myFilePath);
+
+	Parser parser;
+	parser.readInTokens(lex.getTokens());
+
+
+
     return 0;
 }
