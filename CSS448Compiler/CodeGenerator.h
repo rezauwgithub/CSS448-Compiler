@@ -47,6 +47,7 @@ private:
 
 	int numDeclaredInt32s = 0;
 	vector<string> declaredInt32s; // each int32's value is stored as a string.
+	//vector<string> declaredStrings; // each int32's value is stored as a string.
 };
 
 #endif /* CODEGENERATOR_H */

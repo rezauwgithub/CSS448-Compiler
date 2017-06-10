@@ -50,11 +50,16 @@ int main(int argc, char** argv) {
 	cout << "---- Tree ---" << endl;
 	gen.printTree();
 	cout << "---- Done ---" << endl;
-	
-	cout << "---- ASSEMBLY CODE ----" << endl;
 
-	gen.declareInt32("3");
-	gen.generateDeclaredInt32s();
+	cout << "---- ASSEMBLY CODE ----" << endl;
+	gen.generateAssembly(cout);
+
+	//gen.declareInt32("3");
+	//gen.declareInt32("6");
+	//gen.declareInt32("2");
+	//gen.declareInt32("123");
+	//gen.declareInt32("90");
+	//gen.generateDeclaredInt32s();
 
     return 0;
 }

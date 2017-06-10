@@ -58,11 +58,41 @@ void CodeGenerator::generateAssembly(ostream& out) {
 void CodeGenerator::generateAssemblyFromSubtree(Node* curSubtree, ostream& out) {
 	
 	Node* curNode = curSubtree;
+	
+	// postorder traversal
 
-	if (curNode->expressionType == "Number") {
-		if (curNode->token.getTokenClass() == INTEGER) {
-			declareInt32(curNode->token.getTokenText());
+	// generate assembly for children of the current node (if there are any)
+	for (int i = 0; i < curNode->children.size(); i++) {
+		generateAssemblyFromSubtree(curNode->children[i], out);
+	}
+
+	// generate assembly for the current node
+
+	// if the node is a token
+	if (curNode->expressionType == "") {
+
+		enum TokenClass curTokenClass = curNode->token.getTokenClass();
+
+		// if the node is an int32
+
+		string label;
+
+		switch (curTokenClass) {
+		case INTEGER:
+			label = declareInt32(curNode->token.getTokenText());
+			out << "\t\t" << "load_label " << label << endl;
+			out << "\t\t" << "load_mem_int" << endl;
+			break;
+
+		case STRING_LITERAL:
+			break;
 		}
+	}
+	else { // the node is not a token.
+		if (false) {
+			//TODO
+		}
+
 	}
 }
 
