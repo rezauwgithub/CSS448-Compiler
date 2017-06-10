@@ -14,6 +14,9 @@
 #define CODEGENERATOR_H
 
 #include "Node.h"
+#include <string>
+#include <vector>
+#include <iostream>
 
 class CodeGenerator {
 public:
@@ -23,8 +26,20 @@ public:
 
 	void importParseTree(Node* treeRoot);
 
+	// This makes sure that an int will get declared in the assembly which is generated.
+	// You may provide an initial value for the int, but the default value is 0.
+	// The method returns the label where the int is stored.
+	string declareInt32(int initialValue = 0);
+
+	//string declareData();
+
+	void generateDeclaredInt32s(ostream& out = cout);
+
 private:
 	Node* parseTreeRoot;
+
+	int numDeclaredInt32s = 0;
+	vector<int> declaredInt32s;
 };
 
 #endif /* CODEGENERATOR_H */
