@@ -285,8 +285,7 @@ ostream& operator<<(ostream& output,  Token& thisToken) {
 	output << thisToken.getColumnNumber() << "] ";
 
 	output << thisToken.getTokenClassChar();
-	
-	std::deque<char>::iterator it = thisToken.tokenChar.begin();
+
 
 	// print out the string matched for this token, if it's of an appropriate class
 	switch (thisToken.getTokenClass()) {
@@ -307,9 +306,7 @@ ostream& operator<<(ostream& output,  Token& thisToken) {
 		//	thisToken.tokenChar.pop_front();
 		//}
 
-		while (it < thisToken.tokenChar.end()) {
-			output << *it++;
-		}
+		output << thisToken.getTokenText();
 
 		output << ")";
 		break;
@@ -318,6 +315,11 @@ ostream& operator<<(ostream& output,  Token& thisToken) {
 	}
 
 	return output;
+}
+
+string Token::getTokenText() {
+	std::string toReturn(this->tokenChar.begin(), this->tokenChar.end());
+	return toReturn;
 }
 
 

@@ -26,20 +26,27 @@ public:
 
 	void importParseTree(Node* treeRoot);
 
+	// generate the assembly code from our AST.
+	void generateAssembly(ostream& out = cout);
+
 	// This makes sure that an int will get declared in the assembly which is generated.
 	// You may provide an initial value for the int, but the default value is 0.
 	// The method returns the label where the int is stored.
-	string declareInt32(int initialValue = 0);
+	string declareInt32(string initialValue = "0");
 
 	//string declareData();
 
 	void generateDeclaredInt32s(ostream& out = cout);
 
+	void printTree();
+
+	void generateAssemblyFromSubtree(Node* curSubtree, ostream& out);
+
 private:
 	Node* parseTreeRoot;
 
 	int numDeclaredInt32s = 0;
-	vector<int> declaredInt32s;
+	vector<string> declaredInt32s; // each int32's value is stored as a string.
 };
 
 #endif /* CODEGENERATOR_H */

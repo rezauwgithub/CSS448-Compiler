@@ -29,7 +29,7 @@ void CodeGenerator::importParseTree(Node* treeRoot) {
 }
 
 // the default initialValue is zero.
-string CodeGenerator::declareInt32(int initialValue){
+string CodeGenerator::declareInt32(string initialValue){
 	numDeclaredInt32s++;
 
 	declaredInt32s.push_back(initialValue);
@@ -44,6 +44,28 @@ void CodeGenerator::generateDeclaredInt32s(ostream& out) {
 	for (int i = 0; i < declaredInt32s.size(); i++) {
 		currentLabelNumber = i + 1;
 		out << "int32_" + to_string(currentLabelNumber) << ":" << endl;
-		out << "\t\t" << "int_literal " << to_string(declaredInt32s[i]) << endl;
+		out << "\t\t" << "int_literal " << declaredInt32s[i] << endl;
 	}
+}
+
+void CodeGenerator::generateAssembly(ostream& out) {
+
+	generateAssemblyFromSubtree(parseTreeRoot, out);
+
+	generateDeclaredInt32s(out);
+}
+
+void CodeGenerator::generateAssemblyFromSubtree(Node* curSubtree, ostream& out) {
+	
+	Node* curNode = curSubtree;
+
+	if (curNode->expressionType == "Number") {
+		if (curNode->token.getTokenClass() == INTEGER) {
+			declareInt32(curNode->token.getTokenText());
+		}
+	}
+}
+
+void CodeGenerator::printTree() {
+	parseTreeRoot->printSubtree(0);
 }

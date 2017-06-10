@@ -18,6 +18,7 @@
 #include <queue>
 #include <vector>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -138,6 +139,9 @@ class Token {
         void append(char toAppend);
         
         
+		// get the text stored within the token as a string
+		string getTokenText();
+
         // Compares two tokens for equality
         bool operator ==(const Token& other) const;
         

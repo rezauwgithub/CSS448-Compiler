@@ -43,15 +43,17 @@ int main(int argc, char** argv) {
 
 	Parser parser;
 	parser.parseTokens(lex.getTokens());
-	//parser.printTree();
-
-
-	cout << "---- ASSEMBLY CODE ----" << endl;
 
 	CodeGenerator gen;
 	gen.importParseTree(parser.copyTree());
+
+	cout << "---- Tree ---" << endl;
+	gen.printTree();
+	cout << "---- Done ---" << endl;
 	
-	gen.declareInt32(3);
+	cout << "---- ASSEMBLY CODE ----" << endl;
+
+	gen.declareInt32("3");
 	gen.generateDeclaredInt32s();
 
     return 0;
