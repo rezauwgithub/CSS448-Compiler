@@ -1139,7 +1139,7 @@ Token Lexer::createNextToken() {
 			case '=':
 				// operator_==
 
-				myToken.setTokenClassAndPrecedenceAndFamily(OPERATOR_EQUAL);
+				myToken.setTokenClassAndPrecedenceAndFamily(OPERATOR_COMPAREEQUAL);
 				myToken.append(current);
 				break;
 			default:

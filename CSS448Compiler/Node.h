@@ -32,12 +32,16 @@ public:
 	//};
 
 	bool deleteChildren() {
-		cout << "---- " << this->expressionType << " deleted something:" << endl;
-		if (this->expressionType != "" && this->children.size() != 0) {
-			x = x + 1;
-			this->printSubtree(x);
-			x = 0;
-		}
+		//cout << "---- " << this->expressionType << " deleted something:" << endl;
+
+		//if (this->expressionType != "" && this->children.size() != 0) {
+		//	x = x + 1;
+		//	this->printSubtree(x);
+		//	x = 0;
+		//}
+
+
+
 		//cout << "----DONE----" << endl;
 
 
@@ -60,12 +64,16 @@ public:
 	};
 	
 	void printSubtree(int currentIndent) {
-		if (children.empty()) {
+		//if (children.empty()) {
+		if (this->expressionType == "") {
 			for (int j = 0; j < currentIndent; j++) {
 				cout << "\t";
 			}
-			cout << "[" << token.getColumnNumber() << "," << token.getLineNumber() << "] "
-				 <<	token.getTokenClassChar() << endl;
+			//cout << "[" << token.getLineNumber() << "," << token.getColumnNumber() << "] "
+			//	<< token.getTokenClassChar() << endl;
+
+			cout << this->token;
+			cout << endl;
 		}
 		else {
 			for (int j = 0; j < currentIndent; j++) {

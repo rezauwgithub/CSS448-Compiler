@@ -21,7 +21,7 @@ Parser::Parser() {
 void Parser::parseTokens(std::vector<Token> tokens) {
 	readInTokens(tokens);
 	nextToken = this->tokens.begin();
-	
+
 	parseTreeRoot = new ExpressionNode("Root");
 
 	Program(parseTreeRoot);
@@ -34,8 +34,12 @@ void Parser::readInTokens(std::vector<Token> tokens) {
 }
 
 void Parser::printTree() {
+
+	cout << "---- Print Tree ----" << endl;
 	parseTreeRoot->printSubtree(0);
 	cout << endl;
+	cout << "---- Done ----" << endl;
+
 }
 
 bool Parser::match(Node* Parent, TokenClass nextGrammarElementTokenClass) {
@@ -45,6 +49,8 @@ bool Parser::match(Node* Parent, TokenClass nextGrammarElementTokenClass) {
 
 	//ExpressionNode* cur = new ExpressionNode(temp.getTokenClassChar());
 	//Parent->children.push_back(cur);
+	// printTree();
+
 
 	Node* cur = Parent;
 
@@ -69,6 +75,11 @@ bool Parser::Program(Node* Parent){
 	ExpressionNode* cur = new ExpressionNode("Program");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
+	// printTree();
+
 	return (Statements(cur)) ||
 		(cur->deleteChildren());
 }
@@ -76,12 +87,17 @@ bool Parser::Program(Node* Parent){
 
 bool Parser::Statements(Node* Parent)
 {
+	// printTree();
 
 	ExpressionNode* cur = new ExpressionNode("Statements");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
+
 	if (nextToken != tokens.end()) {
-		return (Statements_1(cur)) ||
+		return (Statements_1(cur) || true) ||
 			(cur->deleteChildren());
 	}
 	else {
@@ -92,8 +108,13 @@ bool Parser::Statements(Node* Parent)
 
 bool Parser::Statements_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Statements_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (Statement(cur) &&
 		Statements(cur)) ||
@@ -102,17 +123,26 @@ bool Parser::Statements_1(Node* Parent){
 
 bool Parser::Statements_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Statements_2");
 	Parent->children.push_back(cur);
 
-	return (true) ||
-		(cur->deleteChildren());
+	// printTree();
+
+
+	return true;
 }
 
 bool Parser::Statement(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Statement");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	switch (nextToken->getTokenClass()){
 	case(KEYWORD_TYPE) :
@@ -160,8 +190,13 @@ bool Parser::Statement(Node* Parent){
 
 bool Parser::Declaration_Statement(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Declaration_Statement");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	switch (nextToken->getTokenClass()){
 	case(KEYWORD_TYPE) :
@@ -182,8 +217,13 @@ bool Parser::Declaration_Statement(Node* Parent){
 
 bool Parser::Type_Declaration(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Type_Declaration");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_TYPE) &&
 		match(cur, IDENTIFIER) &&
@@ -194,8 +234,13 @@ bool Parser::Type_Declaration(Node* Parent){
 
 bool Parser::Type_Descriptor(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Type_Descriptor");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 
@@ -206,8 +251,13 @@ bool Parser::Type_Descriptor(Node* Parent){
 
 bool Parser::Type_Descriptor_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Type_Descriptor_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (Non_Array_Type_Descriptor(cur) &&
 		Dimension(cur)) ||
@@ -216,8 +266,13 @@ bool Parser::Type_Descriptor_1(Node* Parent){
 
 bool Parser::Type_Descriptor_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Type_Descriptor_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (Non_Array_Type_Descriptor(cur)) ||
 		(cur->deleteChildren());
@@ -225,8 +280,13 @@ bool Parser::Type_Descriptor_2(Node* Parent){
 
 bool Parser::Non_Array_Type_Descriptor(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Non_Array_Type_Descriptor");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	switch (nextToken->getTokenClass()){
 	case(KEYWORD_RECORD) :
@@ -247,8 +307,13 @@ bool Parser::Non_Array_Type_Descriptor(Node* Parent){
 
 bool Parser::Record_Descriptor(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Record_Descriptor");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_RECORD) &&
 		Field_Declarations(cur) &&
@@ -259,8 +324,13 @@ bool Parser::Record_Descriptor(Node* Parent){
 
 bool Parser::Field_Declarations(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Field_Declarations");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 
@@ -272,8 +342,13 @@ bool Parser::Field_Declarations(Node* Parent){
 
 bool Parser::Field_Declarations_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Field_Declarations_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (Field_Declaration(cur) && Field_Declarations(cur)) ||
 		(cur->deleteChildren());
@@ -281,16 +356,26 @@ bool Parser::Field_Declarations_1(Node* Parent){
 
 bool Parser::Field_Declarations_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Field_Declarations_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, COMMA) && Field_Declarations(cur)) ||
 		(cur->deleteChildren());
 }
 bool Parser::Field_Declarations_3(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Field_Declarations_3");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (true) ||
 		(cur->deleteChildren());
@@ -298,8 +383,13 @@ bool Parser::Field_Declarations_3(Node* Parent){
 
 bool Parser::Field_Declaration(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Field_Declaration");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, IDENTIFIER) &&
 		Type_Descriptor(cur)) ||
@@ -308,8 +398,13 @@ bool Parser::Field_Declaration(Node* Parent){
 
 bool Parser::Basic_Type(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Basic_Type");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	switch (nextToken->getTokenClass()){
 	case(KEYWORD_BYTE) :
@@ -326,8 +421,13 @@ bool Parser::Basic_Type(Node* Parent){
 
 bool Parser::Dimension(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Dimension");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, LEFT_BRACKET) &&
 		Expression(cur) &&
@@ -337,8 +437,13 @@ bool Parser::Dimension(Node* Parent){
 
 bool Parser::Function_Declaration(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Function_Declaration");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return (
@@ -350,8 +455,13 @@ bool Parser::Function_Declaration(Node* Parent){
 
 bool Parser::Function_Declaration_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Function_Declaration_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_FUNCTION) &&
 		match(cur, IDENTIFIER) &&
@@ -363,8 +473,13 @@ bool Parser::Function_Declaration_1(Node* Parent){
 
 bool Parser::Function_Declaration_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Function_Declaration_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_FUNCTION) &&
 		match(cur, IDENTIFIER) &&
@@ -377,8 +492,13 @@ bool Parser::Function_Declaration_2(Node* Parent){
 
 bool Parser::Function_Declaration_3(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Function_Declaration_3");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_FUNCTION) &&
 		match(cur, IDENTIFIER) &&
@@ -393,8 +513,13 @@ bool Parser::Function_Declaration_3(Node* Parent){
 
 bool Parser::Parameters(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Parameters");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (Parameters_1(cur)))) ||
@@ -408,6 +533,9 @@ bool Parser::Parameters_1(Node* Parent){
 	ExpressionNode* cur = new ExpressionNode("Parameters_1");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	return (Parameter(cur) && Parameters(cur)) ||
 		(cur->deleteChildren());
 }
@@ -416,6 +544,9 @@ bool Parser::Parameters_2(Node* Parent){
 
 	ExpressionNode* cur = new ExpressionNode("Parameters_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, COMMA) && Parameters_1(cur)) ||
 		(cur->deleteChildren());
@@ -426,6 +557,9 @@ bool Parser::Parameters_3(Node* Parent){
 	ExpressionNode* cur = new ExpressionNode("Parameters_3");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	return (true) ||
 		(cur->deleteChildren());
 }
@@ -434,6 +568,9 @@ bool Parser::Parameter(Node* Parent){
 
 	ExpressionNode* cur = new ExpressionNode("Parameter");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (Parameter_1(cur)))) ||
@@ -449,6 +586,9 @@ bool Parser::Parameter_1(Node* Parent){
 	ExpressionNode* cur = new ExpressionNode("Parameter_1");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	return (match(cur, KEYWORD_REF) &&
 		match(cur, KEYWORD_CONST) &&
 		match(cur, IDENTIFIER) &&
@@ -462,6 +602,9 @@ bool Parser::Parameter_2(Node* Parent){
 	ExpressionNode* cur = new ExpressionNode("Parameter_2");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	return (match(cur, KEYWORD_CONST) &&
 		match(cur, IDENTIFIER) &&
 		Non_Array_Type_Descriptor(cur) &&
@@ -474,6 +617,9 @@ bool Parser::Parameter_3(Node* Parent){
 	ExpressionNode* cur = new ExpressionNode("Parameter_3");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	return (match(cur, IDENTIFIER) &&
 		Non_Array_Type_Descriptor(cur) &&
 		Dimension_Wildcards(cur)) ||
@@ -485,6 +631,9 @@ bool Parser::Parameter_4(Node* Parent){
 	ExpressionNode* cur = new ExpressionNode("Parameter_4");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	return (match(cur, IDENTIFIER) &&
 		Non_Array_Type_Descriptor(cur)) ||
 		(cur->deleteChildren());
@@ -494,6 +643,9 @@ bool Parser::Parameter_5(Node* Parent){
 
 	ExpressionNode* cur = new ExpressionNode("Parameter_5");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_REF) &&
 		match(cur, KEYWORD_CONST) &&
@@ -508,6 +660,9 @@ bool Parser::Dimension_Wildcards(Node* Parent){
 	ExpressionNode* cur = new ExpressionNode("Dimension_Wildcards");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	return (match(cur, LEFT_BRACKET) &&
 		Dimension_Args(cur) &&
 		match(cur, RIGHT_BRACKET)) ||
@@ -519,6 +674,9 @@ bool Parser::Dimension_Args(Node* Parent){
 	ExpressionNode* cur = new ExpressionNode("Dimension_Args");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, COMMA) && Dimension_Args(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (true)))) ||
@@ -529,8 +687,13 @@ bool Parser::Dimension_Args(Node* Parent){
 
 bool Parser::Variable_Declaration(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Variable_Declaration");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (Variable_Declaration_1(cur)))) ||
@@ -544,8 +707,13 @@ bool Parser::Variable_Declaration(Node* Parent){
 
 bool Parser::Variable_Declaration_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Variable_Declaration_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_STATIC) &&
 		match(cur, KEYWORD_CONST) &&
@@ -558,8 +726,13 @@ bool Parser::Variable_Declaration_1(Node* Parent){
 
 bool Parser::Variable_Declaration_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Variable_Declaration_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_CONST) &&
 		match(cur, KEYWORD_VAR) &&
@@ -571,8 +744,13 @@ bool Parser::Variable_Declaration_2(Node* Parent){
 
 bool Parser::Variable_Declaration_3(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Variable_Declaration_3");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_VAR) &&
 		match(cur, IDENTIFIER) &&
@@ -583,14 +761,19 @@ bool Parser::Variable_Declaration_3(Node* Parent){
 
 bool Parser::Variable_Declaration_4(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Variable_Declaration_4");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_STATIC) &&
 		match(cur, KEYWORD_CONST) &&
 		match(cur, KEYWORD_VAR) &&
 		match(cur, IDENTIFIER) &&
-		match(cur, OPERATOR_EQUAL) &&
+		match(cur, OPERATOR_COMPAREEQUAL) &&
 		Expression(cur) &&
 		match(cur, SEMICOLON)) ||
 		(cur->deleteChildren());
@@ -598,13 +781,18 @@ bool Parser::Variable_Declaration_4(Node* Parent){
 
 bool Parser::Variable_Declaration_5(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Variable_Declaration_5");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_CONST) &&
 		match(cur, KEYWORD_VAR) &&
 		match(cur, IDENTIFIER) &&
-		match(cur, OPERATOR_EQUAL) &&
+		match(cur, OPERATOR_ASSIGNMENT) &&
 		Expression(cur) &&
 		match(cur, SEMICOLON)) ||
 		(cur->deleteChildren());
@@ -612,12 +800,17 @@ bool Parser::Variable_Declaration_5(Node* Parent){
 
 bool Parser::Variable_Declaration_6(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Variable_Declaration_6");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	return (match(cur, KEYWORD_VAR) &&
 		match(cur, IDENTIFIER) &&
-		match(cur, OPERATOR_EQUAL) &&
+		match(cur, OPERATOR_ASSIGNMENT) &&
 		Expression(cur) &&
 		match(cur, SEMICOLON)) ||
 		(cur->deleteChildren());
@@ -626,8 +819,13 @@ bool Parser::Variable_Declaration_6(Node* Parent){
 
 bool Parser::Block_Statement(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Block_Statement");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, LEFT_CURLY_BRACE) &&
 		Statements(cur) &&
@@ -637,8 +835,13 @@ bool Parser::Block_Statement(Node* Parent){
 
 bool Parser::For_Statement(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("For_Statement");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_FOR) &&
 		match(cur, LEFT_PAREN) &&
@@ -647,7 +850,6 @@ bool Parser::For_Statement(Node* Parent){
 		Expression(cur) &&
 		match(cur, SEMICOLON) &&
 		Expression(cur) &&
-		match(cur, SEMICOLON) &&
 		match(cur, RIGHT_PAREN) &&
 		Block_Statement(cur)) ||
 		(cur->deleteChildren());
@@ -655,8 +857,13 @@ bool Parser::For_Statement(Node* Parent){
 
 bool Parser::While_Statement(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("While_Statement");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_WHILE) &&
 		match(cur, LEFT_PAREN) &&
@@ -668,8 +875,13 @@ bool Parser::While_Statement(Node* Parent){
 
 bool Parser::If_Statement(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("If_Statement");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (If_Statement_1(cur)))) ||
@@ -679,8 +891,13 @@ bool Parser::If_Statement(Node* Parent){
 
 bool Parser::If_Statement_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("If_Statement_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_IF) &&
 		match(cur, LEFT_PAREN) &&
@@ -695,8 +912,13 @@ bool Parser::If_Statement_1(Node* Parent){
 
 bool Parser::If_Statement_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("If_Statement_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_IF) &&
 		match(cur, LEFT_PAREN) &&
@@ -707,8 +929,13 @@ bool Parser::If_Statement_2(Node* Parent){
 
 bool Parser::Print_Statement(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Print_Statement");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_PRINT) &&
 		Expression(cur) &&
@@ -718,8 +945,13 @@ bool Parser::Print_Statement(Node* Parent){
 
 bool Parser::Return_Statement(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Return_Statement");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (Return_Statement_1(cur)))) ||
@@ -729,8 +961,13 @@ bool Parser::Return_Statement(Node* Parent){
 
 bool Parser::Return_Statement_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Return_Statement_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_RETURN) &&
 		Expression(cur) &&
@@ -740,8 +977,13 @@ bool Parser::Return_Statement_1(Node* Parent){
 
 bool Parser::Return_Statement_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Return_Statement_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_RETURN) &&
 		match(cur, SEMICOLON)) ||
@@ -750,8 +992,13 @@ bool Parser::Return_Statement_2(Node* Parent){
 
 bool Parser::Exit_Statement(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Exit_Statement");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (Exit_Statement_1(cur)))) ||
@@ -761,8 +1008,13 @@ bool Parser::Exit_Statement(Node* Parent){
 
 bool Parser::Exit_Statement_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Exit_Statement_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_EXIT) &&
 		Expression(cur) &&
@@ -772,8 +1024,13 @@ bool Parser::Exit_Statement_1(Node* Parent){
 
 bool Parser::Exit_Statement_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Exit_Statement_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, KEYWORD_EXIT) &&
 		match(cur, SEMICOLON)) ||
@@ -782,8 +1039,13 @@ bool Parser::Exit_Statement_2(Node* Parent){
 
 bool Parser::Expression_Statement(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression_Statement");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (Expression(cur) &&
 		match(cur, SEMICOLON)) ||
@@ -792,19 +1054,29 @@ bool Parser::Expression_Statement(Node* Parent){
 
 bool Parser::Expressions(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expressions");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
-	return ((nextToken = save, (cur->deleteChildren() || (Expressions_1(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (Expressions_2(cur))))) ||
+	return ((nextToken = save, (cur->deleteChildren() || (Expression(cur) && Expressions_1(cur)))) ||
+		(nextToken = save, (cur->deleteChildren() || (Expression(cur) && Expressions_2(cur))))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Expressions_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expressions_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, COMMA) &&
 		Expression(cur) &&
@@ -814,8 +1086,13 @@ bool Parser::Expressions_1(Node* Parent){
 
 bool Parser::Expressions_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expressions_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (true) ||
 		(cur->deleteChildren());
@@ -823,11 +1100,17 @@ bool Parser::Expressions_2(Node* Parent){
 
 bool Parser::Expression(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
-	return ((nextToken = save, (cur->deleteChildren() || (Expression_1(cur)))) ||
+	return ((nextToken = save, (cur->deleteChildren() || (Expression_10(cur)))) ||
+		(nextToken = save, (cur->deleteChildren() || (Expression_1(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Expression_2(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Expression_3(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Expression_4(cur)))) ||
@@ -841,8 +1124,13 @@ bool Parser::Expression(Node* Parent){
 
 bool Parser::Expression_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (Type_Cast(cur) &&
 		Additional_Expression(cur)) ||
@@ -851,8 +1139,13 @@ bool Parser::Expression_1(Node* Parent){
 
 bool Parser::Expression_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (Function_Call(cur) &&
 		Additional_Expression(cur)) ||
@@ -861,8 +1154,13 @@ bool Parser::Expression_2(Node* Parent){
 
 bool Parser::Expression_3(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression_3");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (Variable(cur) &&
 		Additional_Expression(cur)) ||
@@ -871,8 +1169,13 @@ bool Parser::Expression_3(Node* Parent){
 
 bool Parser::Expression_4(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression_4");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (Number(cur) &&
 		Additional_Expression(cur)) ||
@@ -882,8 +1185,13 @@ bool Parser::Expression_4(Node* Parent){
 //DOUBLE CHECK TO SEE IF CORRECT
 bool Parser::Expression_5(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression_5");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, STRING_LITERAL) &&
 		Additional_Expression(cur)) ||
@@ -892,8 +1200,13 @@ bool Parser::Expression_5(Node* Parent){
 
 bool Parser::Expression_6(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression_6");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, LEFT_PAREN) &&
 		Expression(cur) &&
@@ -904,8 +1217,13 @@ bool Parser::Expression_6(Node* Parent){
 
 bool Parser::Expression_7(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression_7");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, OPERATOR_EXCLAMATION_POINT) &&
 		Expression(cur) &&
@@ -915,8 +1233,13 @@ bool Parser::Expression_7(Node* Parent){
 
 bool Parser::Expression_8(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression_8");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, OPERATOR_TILDE) &&
 		Expression(cur) &&
@@ -928,8 +1251,13 @@ bool Parser::Expression_8(Node* Parent){
 
 bool Parser::Expression_9(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Expression_9");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, OPERATOR_MINUS) &&
 		Expression(cur) &&
@@ -937,10 +1265,31 @@ bool Parser::Expression_9(Node* Parent){
 		(cur->deleteChildren());
 }
 
+bool Parser::Expression_10(Node* Parent){
+
+	// printTree();
+
+	ExpressionNode* cur = new ExpressionNode("Expression_10");
+	Parent->children.push_back(cur);
+
+	// printTree();
+
+
+	return (Variable(cur) &&
+		match(cur, OPERATOR_ASSIGNMENT) &&
+		Expression(cur)) ||
+		(cur->deleteChildren());
+}
+
 bool Parser::Additional_Expression(Node* Parent){
+
+	// printTree();
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (Additional_Expression_1(cur)))) ||
@@ -958,191 +1307,291 @@ bool Parser::Additional_Expression(Node* Parent){
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_13(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_14(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_15(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_16(cur))))) ||
+		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_16(cur)))) ||
+		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_17(cur))))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_1");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_PLUS) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_2");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_MINUS) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_3(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_3");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_ASTERISK) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_4(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_4");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_DIVISION) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_5(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_5");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_BITWISE_AND) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_6(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_6");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_BITWISE_OR) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_7(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_7");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_LEFT_SHIFT) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_8(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_8");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_RIGHT_SHIFT) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_9(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_9");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
-	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_EQUAL) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_COMPAREEQUAL) && Expression(cur) && Additional_Expression(cur)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_10(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_10");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_NOT_EQUAL) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_11(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_11");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_LESS_THAN) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_12(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_12");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_LESS_OR_EQUAL) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_13(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_13");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_GREATER_THAN) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_14(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_14");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_GREATER_OR_EQUAL) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_15(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_15");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_LOGICAL_AND) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
 }
 
 bool Parser::Additional_Expression_16(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_16");
 	Parent->children.push_back(cur);
 
+	// printTree();
+
+
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_LOGICAL_OR) && Expression(cur) && Additional_Expression(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (true)))) ||
+		(nextToken = save, (cur->deleteChildren() || (false)))) ||
 		(cur->deleteChildren());
+}
+
+bool Parser::Additional_Expression_17(Node* Parent){
+
+	// printTree();
+
+	ExpressionNode* cur = new ExpressionNode("Additional_Expression_17");
+	Parent->children.push_back(cur);
+
+	// printTree();
+
+
+	std::vector<Token>::iterator save = nextToken;
+	return true;
 }
 
 
 bool Parser::Type_Cast(Node* Parent) {
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Type_Cast");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (Basic_Type(cur) &&
 		match(cur, LEFT_PAREN) &&
@@ -1153,8 +1602,13 @@ bool Parser::Type_Cast(Node* Parent) {
 
 bool Parser::Function_Call(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Function_Call");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (Function_Call_1(cur)))) ||
@@ -1163,8 +1617,13 @@ bool Parser::Function_Call(Node* Parent){
 }
 bool Parser::Function_Call_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Function_Call_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, IDENTIFIER) &&
 		match(cur, LEFT_PAREN) &&
@@ -1175,8 +1634,13 @@ bool Parser::Function_Call_1(Node* Parent){
 
 bool Parser::Function_Call_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Function_Call_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, IDENTIFIER) &&
 		match(cur, LEFT_PAREN) &&
@@ -1187,8 +1651,13 @@ bool Parser::Function_Call_2(Node* Parent){
 
 bool Parser::Variable(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Variable");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (Variable_1(cur)))) ||
@@ -1198,8 +1667,13 @@ bool Parser::Variable(Node* Parent){
 
 bool Parser::Variable_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Variable_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, IDENTIFIER)) ||
 		(cur->deleteChildren());
@@ -1207,8 +1681,13 @@ bool Parser::Variable_1(Node* Parent){
 
 bool Parser::Variable_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Variable_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, IDENTIFIER) &&
 		Subscript(cur) &&
@@ -1218,8 +1697,13 @@ bool Parser::Variable_2(Node* Parent){
 
 bool Parser::Additional_Variables(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Variables");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (Additional_Variables_1(cur)))) ||
@@ -1229,8 +1713,13 @@ bool Parser::Additional_Variables(Node* Parent){
 
 bool Parser::Additional_Variables_1(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Variables_1");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, OPERATOR_DOT) &&
 		Variable(cur) &&
@@ -1240,8 +1729,13 @@ bool Parser::Additional_Variables_1(Node* Parent){
 
 bool Parser::Additional_Variables_2(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Additional_Variables_2");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (true) ||
 		(cur->deleteChildren());
@@ -1249,8 +1743,13 @@ bool Parser::Additional_Variables_2(Node* Parent){
 
 bool Parser::Subscript(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Subscript");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	return (match(cur, LEFT_BRACKET) &&
 		Expressions(cur) &&
@@ -1260,8 +1759,13 @@ bool Parser::Subscript(Node* Parent){
 
 bool Parser::Number(Node* Parent){
 
+	// printTree();
+
 	ExpressionNode* cur = new ExpressionNode("Number");
 	Parent->children.push_back(cur);
+
+	// printTree();
+
 
 	std::vector<Token>::iterator save = nextToken;
 	return ((nextToken = save, (cur->deleteChildren() || (match(cur, CHARACTER_LITERAL)))) ||

@@ -43,6 +43,5 @@ int main(int argc, char** argv) {
 	parser.parseTokens(lex.getTokens());
 	parser.printTree();
 
-
     return 0;
 }

@@ -21,7 +21,6 @@
 class Parser{
 public:
     Parser();
-    
 
 	std::vector<Token> tokens;
 	void parseTokens(std::vector<Token>);
@@ -139,6 +138,7 @@ private:
 		bool Expression_7(Node*);
 		bool Expression_8(Node*);
 		bool Expression_9(Node*);
+		bool Expression_10(Node*);
 
 		bool Additional_Expression(Node*);
 		bool Additional_Expression_1(Node*);
@@ -157,6 +157,8 @@ private:
 		bool Additional_Expression_14(Node*);
 		bool Additional_Expression_15(Node*);
 		bool Additional_Expression_16(Node*);
+		bool Additional_Expression_17(Node*);
+
 
 		bool Type_Cast(Node*);
 

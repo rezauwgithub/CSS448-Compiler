@@ -44,7 +44,7 @@ Token::Token()
 	tokenClassLookup.push_back("OPERATOR_LESS_OR_EQUAL");
 	tokenClassLookup.push_back("OPERATOR_GREATER_THAN");
 	tokenClassLookup.push_back("OPERATOR_GREATER_OR_EQUAL");
-	tokenClassLookup.push_back("OPERATOR_EQUAL");
+	tokenClassLookup.push_back("OPERATOR_COMPAREEQUAL");
 	tokenClassLookup.push_back("OPERATOR_NOT_EQUAL");
 	tokenClassLookup.push_back("OPERATOR_AMPERSAND");
 	tokenClassLookup.push_back("OPERATOR_BITWISE_AND");
@@ -154,7 +154,7 @@ int Token::setTokenPrecedence(TokenClass tokenClass) {
             return 6;
             break;
             
-        case OPERATOR_EQUAL:
+        case OPERATOR_COMPAREEQUAL:
         case OPERATOR_NOT_EQUAL:
         case OPERATOR_AMPERSAND:
         case OPERATOR_BITWISE_AND:
@@ -286,6 +286,8 @@ ostream& operator<<(ostream& output,  Token& thisToken) {
 
 	output << thisToken.getTokenClassChar();
 	
+	std::deque<char>::iterator it = thisToken.tokenChar.begin();
+
 	// print out the string matched for this token, if it's of an appropriate class
 	switch (thisToken.getTokenClass()) {
 	case ERROR:
@@ -300,9 +302,13 @@ ostream& operator<<(ostream& output,  Token& thisToken) {
 	case STRING_LITERAL:
 		output << " (";
 
-		while (thisToken.tokenChar.size() > 0) {
-			output << thisToken.tokenChar.front();
-			thisToken.tokenChar.pop_front();
+		//while (thisToken.tokenChar.size() > 0) {
+		//	output << thisToken.tokenChar.front();
+		//	thisToken.tokenChar.pop_front();
+		//}
+
+		while (it < thisToken.tokenChar.end()) {
+			output << *it++;
 		}
 
 		output << ")";
