@@ -22,3 +22,6 @@ CodeGenerator::CodeGenerator(const CodeGenerator& orig) {
 CodeGenerator::~CodeGenerator() {
 }
 
+void CodeGenerator::importParseTree(Node* treeRoot) {
+	parseTreeRoot = treeRoot;
+}

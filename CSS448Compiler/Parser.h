@@ -25,6 +25,7 @@ public:
 	std::vector<Token> tokens;
 	void parseTokens(std::vector<Token>);
 	void printTree();
+	Node* copyTree();
 
     
 private:
@@ -43,7 +44,7 @@ private:
 
 		bool Statements(Node*);
 		bool Statements_1(Node*);
-		bool Statements_2(Node*);
+		bool Statements_END(Node*);
 
 		bool Statement(Node*);
 
@@ -157,7 +158,7 @@ private:
 		bool Additional_Expression_14(Node*);
 		bool Additional_Expression_15(Node*);
 		bool Additional_Expression_16(Node*);
-		bool Additional_Expression_17(Node*);
+		bool Additional_Expression_END(Node*);
 
 
 		bool Type_Cast(Node*);

@@ -24,7 +24,7 @@ public:
     std::vector<Node*> children;
 	std::string expressionType;
 	Token token;
-
+	
     //int depth;
 	
 	//Node() {
@@ -43,12 +43,6 @@ public:
 
 
 		//cout << "----DONE----" << endl;
-
-
-		//if (this->expressionType == "Program") {
-		//	cout << "Oh shit!" << endl;
-		//	
-		//}
 		
 		int i = children.size() - 1;
 		while (i >= 0) {
@@ -87,6 +81,25 @@ public:
 		}
 	};
 
+	Node* copySubtree() {
+		Node* curSubtree = this->copyCurrentNode();
+		if (this->children.empty()) {
+			return curSubtree;
+		}
+		else {
+			for (int i = 0; i < this->children.size(); i++) {
+				curSubtree->children.push_back(this->children[i]->copySubtree());
+			}
+		}
+		return curSubtree;
+	};
+
+	Node* copyCurrentNode() {
+		Node* toReturn = new Node();
+		toReturn->expressionType = this->expressionType;
+		toReturn->token = this->token;
+		return toReturn;
+	};
 };
 
 

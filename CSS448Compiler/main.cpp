@@ -17,6 +17,8 @@
 #include <string>
 #include "Lexer.h"
 #include "Parser.h"
+#include "Node.h"
+#include "CodeGenerator.h"
 
 
 using namespace std;
@@ -42,6 +44,10 @@ int main(int argc, char** argv) {
 	Parser parser;
 	parser.parseTokens(lex.getTokens());
 	parser.printTree();
+
+	CodeGenerator gen;
+	gen.importParseTree(parser.copyTree());
+	
 
     return 0;
 }

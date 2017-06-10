@@ -10,17 +10,21 @@
  *
  * Created on June 8, 2017, 11:41 PM
  */
-
 #ifndef CODEGENERATOR_H
 #define CODEGENERATOR_H
+
+#include "Node.h"
 
 class CodeGenerator {
 public:
     CodeGenerator();
     CodeGenerator(const CodeGenerator& orig);
     virtual ~CodeGenerator();
-private:
 
+	void importParseTree(Node* treeRoot);
+
+private:
+	Node* parseTreeRoot;
 };
 
 #endif /* CODEGENERATOR_H */

@@ -42,6 +42,13 @@ void Parser::printTree() {
 
 }
 
+Node* Parser::copyTree() {
+	if (parseTreeRoot == NULL) {
+		return NULL;
+	}
+	return parseTreeRoot->copySubtree();
+}
+
 bool Parser::match(Node* Parent, TokenClass nextGrammarElementTokenClass) {
 
 	//Token temp;
@@ -101,7 +108,7 @@ bool Parser::Statements(Node* Parent)
 			(cur->deleteChildren());
 	}
 	else {
-		return (Statements_2(cur)) ||
+		return (Statements_END(cur)) ||
 			(cur->deleteChildren());
 	}
 }
@@ -121,11 +128,11 @@ bool Parser::Statements_1(Node* Parent){
 		(cur->deleteChildren());
 }
 
-bool Parser::Statements_2(Node* Parent){
+bool Parser::Statements_END(Node* Parent){
 
 	// printTree();
 
-	ExpressionNode* cur = new ExpressionNode("Statements_2");
+	ExpressionNode* cur = new ExpressionNode("Statements_END");
 	Parent->children.push_back(cur);
 
 	// printTree();
@@ -1308,7 +1315,7 @@ bool Parser::Additional_Expression(Node* Parent){
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_14(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_15(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_16(cur)))) ||
-		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_17(cur))))) ||
+		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))) ||
 		(cur->deleteChildren());
 }
 
@@ -1568,11 +1575,11 @@ bool Parser::Additional_Expression_16(Node* Parent){
 		(cur->deleteChildren());
 }
 
-bool Parser::Additional_Expression_17(Node* Parent){
+bool Parser::Additional_Expression_END(Node* Parent){
 
 	// printTree();
 
-	ExpressionNode* cur = new ExpressionNode("Additional_Expression_17");
+	ExpressionNode* cur = new ExpressionNode("Additional_Expression_END");
 	Parent->children.push_back(cur);
 
 	// printTree();
