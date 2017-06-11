@@ -142,9 +142,16 @@ private:
 		bool Expression_8(Node*);
 		bool Expression_9(Node*);
 		bool Expression_10(Node*);
+		bool Expression_11(Node*);
 
-		bool Additional_Expression(Node*);
-		bool Additional_Expression_ADD(Node*);
+		bool Expression_Assignment(Node*);
+		bool Expression_Type_Cast(Node*);
+		bool Expression_Function_Call(Node*);
+		bool Expression_Variable(Node*);
+		bool Expression_Number(Node*);
+		bool Expression_String(Node*);
+		bool Expression_Parens(Node*);
+
 		bool Additional_Expression_2(Node*);
 		bool Additional_Expression_3(Node*);
 		bool Additional_Expression_4(Node*);
@@ -155,11 +162,6 @@ private:
 		bool Additional_Expression_9(Node*);
 		bool Additional_Expression_10(Node*);
 		bool Additional_Expression_11(Node*);
-		bool Additional_Expression_12(Node*);
-		bool Additional_Expression_13(Node*);
-		bool Additional_Expression_14(Node*);
-		bool Additional_Expression_15(Node*);
-		bool Additional_Expression_16(Node*);
 		bool Additional_Expression_END(Node*);
 
 
