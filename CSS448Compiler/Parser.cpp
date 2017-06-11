@@ -30,6 +30,11 @@ void Parser::parseTokens(std::vector<Token> tokens) {
 
 	Program(parseTreeRoot);
 
+	SimplifyTree(parseTreeRoot);
+
+}
+
+void Parser::SimplifyTree(Node* cur) {
 
 }
 
@@ -1255,12 +1260,18 @@ bool Parser::Expression_Assignment(Node* Parent){
 bool Parser::Additional_Expression_11(Node* Parent) {
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_11");
-	Parent->children.push_back(cur);
+	//Parent->children.push_back(cur);
 	std::vector<Token>::iterator save = nextToken;
-	return ((
+	bool result = ((
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_LOGICAL_OR) && Expression_11(cur) && Additional_Expression_11(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
+	if (result == true) {
+		if (cur->children.size() > 0) {
+			Parent->children.push_back(cur);
+		}
+	}
+	return result;
 }
 
 bool Parser::Expression_11(Node* Parent) {
@@ -1276,12 +1287,18 @@ bool Parser::Expression_11(Node* Parent) {
 bool Parser::Additional_Expression_10(Node* Parent) {
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_10");
-	Parent->children.push_back(cur);
+	//Parent->children.push_back(cur);
 	std::vector<Token>::iterator save = nextToken;
-	return ((
+	bool result = ((
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_LOGICAL_AND) && Expression_10(cur) && Additional_Expression_10(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
+	if (result == true) {
+		if (cur->children.size() > 0) {
+			Parent->children.push_back(cur);
+		}
+	}
+	return result;
 }
 
 bool Parser::Expression_10(Node* Parent) {
@@ -1297,12 +1314,18 @@ bool Parser::Expression_10(Node* Parent) {
 bool Parser::Additional_Expression_9(Node* Parent) {
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_9");
-	Parent->children.push_back(cur);
+	//Parent->children.push_back(cur);
 	std::vector<Token>::iterator save = nextToken;
-	return ((
+	bool result = ((
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_BITWISE_OR) && Expression_9(cur) && Additional_Expression_9(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
+	if (result == true) {
+		if (cur->children.size() > 0) {
+			Parent->children.push_back(cur);
+		}
+	}
+	return result;
 }
 
 bool Parser::Expression_9(Node* Parent) {
@@ -1318,12 +1341,18 @@ bool Parser::Expression_9(Node* Parent) {
 bool Parser::Additional_Expression_8(Node* Parent) { // TODO: this is the "^" operator, it should be BITWISE_XOR
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_8");
-	Parent->children.push_back(cur);
+	//Parent->children.push_back(cur);
 	std::vector<Token>::iterator save = nextToken;
-	return ((
+	bool result = ((
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_BITWISE_AND) && Expression_8(cur) && Additional_Expression_8(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
+	if (result == true) {
+		if (cur->children.size() > 0) {
+			Parent->children.push_back(cur);
+		}
+	}
+	return result;
 }
 
 bool Parser::Expression_8(Node* Parent) {
@@ -1339,12 +1368,18 @@ bool Parser::Expression_8(Node* Parent) {
 bool Parser::Additional_Expression_7(Node* Parent) {
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_7");
-	Parent->children.push_back(cur);
+	//Parent->children.push_back(cur);
 	std::vector<Token>::iterator save = nextToken;
-	return ((
+	bool result = ((
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_BITWISE_AND) && Expression_7(cur) && Additional_Expression_7(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
+	if (result == true) {
+		if (cur->children.size() > 0) {
+			Parent->children.push_back(cur);
+		}
+	}
+	return result;
 }
 
 bool Parser::Expression_7(Node* Parent) {
@@ -1360,13 +1395,19 @@ bool Parser::Expression_7(Node* Parent) {
 bool Parser::Additional_Expression_6(Node* Parent) {
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_6");
-	Parent->children.push_back(cur);
+	//Parent->children.push_back(cur);
 	std::vector<Token>::iterator save = nextToken;
-	return ((
+	bool result = ((
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_COMPAREEQUAL) && Expression_6(cur) && Additional_Expression_6(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_NOT_EQUAL) && Expression_6(cur) && Additional_Expression_6(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
+	if (result == true) {
+		if (cur->children.size() > 0) {
+			Parent->children.push_back(cur);
+		}
+	}
+	return result;
 }
 
 bool Parser::Expression_6(Node* Parent) {
@@ -1382,15 +1423,21 @@ bool Parser::Expression_6(Node* Parent) {
 bool Parser::Additional_Expression_5(Node* Parent) {
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_5");
-	Parent->children.push_back(cur);
+	//Parent->children.push_back(cur);
 	std::vector<Token>::iterator save = nextToken;
-	return ((
+	bool result = ((
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_LESS_THAN) && Expression_5(cur) && Additional_Expression_5(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_LESS_OR_EQUAL) && Expression_5(cur) && Additional_Expression_5(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_GREATER_THAN) && Expression_5(cur) && Additional_Expression_5(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_GREATER_OR_EQUAL) && Expression_5(cur) && Additional_Expression_5(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
+	if (result == true) {
+		if (cur->children.size() > 0) {
+			Parent->children.push_back(cur);
+		}
+	}
+	return result;
 }
 
 bool Parser::Expression_5(Node* Parent) {
@@ -1406,13 +1453,19 @@ bool Parser::Expression_5(Node* Parent) {
 bool Parser::Additional_Expression_4(Node* Parent) {
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_4");
-	Parent->children.push_back(cur);
+	//Parent->children.push_back(cur);
 	std::vector<Token>::iterator save = nextToken;
-	return ((
+	bool result = ((
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_LEFT_SHIFT) && Expression_4(cur) && Additional_Expression_4(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_RIGHT_SHIFT) && Expression_4(cur) && Additional_Expression_4(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
+	if (result == true) {
+		if (cur->children.size() > 0) {
+			Parent->children.push_back(cur);
+		}
+	}
+	return result;
 }
 
 bool Parser::Expression_4(Node* Parent) {
@@ -1428,13 +1481,19 @@ bool Parser::Expression_4(Node* Parent) {
 bool Parser::Additional_Expression_3(Node* Parent) {
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_3");
-	Parent->children.push_back(cur);
+	//Parent->children.push_back(cur);
 	std::vector<Token>::iterator save = nextToken;
-	return ((
+	bool result = ((
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_PLUS) && Expression_3(cur) && Additional_Expression_3(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_MINUS) && Expression_3(cur) && Additional_Expression_3(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
+	if (result == true) {
+		if (cur->children.size() > 0) {
+			Parent->children.push_back(cur);
+		}
+	}
+	return result;
 }
 
 bool Parser::Expression_3(Node* Parent) {
@@ -1450,13 +1509,19 @@ bool Parser::Expression_3(Node* Parent) {
 bool Parser::Additional_Expression_2(Node* Parent) {
 
 	ExpressionNode* cur = new ExpressionNode("Additional_Expression_2");
-	Parent->children.push_back(cur);
+	//Parent->children.push_back(cur);
 	std::vector<Token>::iterator save = nextToken;
-	return ((
+	bool result = ((
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_ASTERISK) && Expression_2(cur) && Additional_Expression_2(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (match(cur, OPERATOR_DIVISION) && Expression_2(cur) && Additional_Expression_2(cur)))) ||
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
+	if (result == true) {
+		if (cur->children.size() > 0) {
+			Parent->children.push_back(cur);
+		}
+	}
+	return result;
 }
 
 bool Parser::Expression_2(Node* Parent) { // TODO: This should be OPERATOR_NEGATE (needs to be added) and not OPERATOR_MINUS
@@ -1498,8 +1563,8 @@ bool Parser::Additional_Expression_END(Node* Parent){
 
 	// printTree(); // debug
 
-	ExpressionNode* cur = new ExpressionNode("Additional_Expression_END");
-	Parent->children.push_back(cur);
+	//ExpressionNode* cur = new ExpressionNode("Additional_Expression_END");
+	//Parent->children.push_back(cur);
 
 	// printTree(); // debug
 

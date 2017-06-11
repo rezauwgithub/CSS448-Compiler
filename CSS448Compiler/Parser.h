@@ -44,6 +44,8 @@ private:
         
 		bool Program(Node*);
 
+		void SimplifyTree(Node*);
+
 		bool Statements(Node*);
 		bool Statements_1(Node*);
 		bool Statements_END(Node*);
