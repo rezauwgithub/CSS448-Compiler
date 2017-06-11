@@ -39,7 +39,7 @@ void Parser::SimplifyTree(Node* cur) {
 		cur->children[0] = cur->children[0]->children[0];
 	}
 	for (int i = 0; i < cur->children.size(); i++) {
-
+		//
 	}
 	for (int i = 0; i < cur->children.size(); i++) {
 		SimplifyTree(cur->children[i]);
@@ -83,7 +83,15 @@ bool Parser::match(Node* Parent, TokenClass nextGrammarElementTokenClass) {
 	//Check if next token's class == token class of next item in grammar
 	if (nextTokenClass == nextGrammarElementTokenClass) {
 		TokenNode* toAdd = new TokenNode(*nextToken);
-		Parent->children.push_back(toAdd);
+		
+		// drop symbols from the AST
+		switch (nextTokenClass) {
+		case SEMICOLON:
+			break;
+		default:
+			Parent->children.push_back(toAdd);
+			break;
+		}
 		nextToken++;
 		return (true) ||
 			(cur->deleteChildren());
@@ -114,13 +122,12 @@ bool Parser::Statements(Node* Parent)
 	// printTree(); // debug
 
 	ExpressionNode* cur = new ExpressionNode("Statements");
-	Parent->children.push_back(cur);
+
 
 	// printTree(); // debug
 
-
-
 	if (nextToken != tokens.end()) {
+		Parent->children.push_back(cur);
 		return (Statements_1(cur) || true) ||
 			(cur->deleteChildren());
 	}
