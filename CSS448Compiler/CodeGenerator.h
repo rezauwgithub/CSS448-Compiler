@@ -19,49 +19,64 @@
 #include <iostream>
 #include <sstream>
 
-class CodeGenerator {
+class CodeGenerator 
+{
 public:
     CodeGenerator();
     CodeGenerator(const CodeGenerator& orig);
     virtual ~CodeGenerator();
         
-    
-        std::string generateAssemblyCodeForStringIntL(std::string str);
-        std::string getAssemblyCodeForAllStringsIntL();
-        std::string generateAssemblyCodeForStringLoop();
-        std::string generateAssemblyCodeForStringDone();
-        
         
 
 	void importParseTree(Node* treeRoot);
-
+        
+        
+	//string declareData();
+        
+        std::string getAllAssemblyStrIntLiterals();
+        std::string getAllAssemblyInt32IntLiterals();
+        std::string getAllAssemblyFloatInterLiterals();
+        
+        
+        void outputAssemblyStrIntLiterals(std::string str, std::ostream& oStream = cout);
+	void outputAssemblyInt32IntLiterals(std::string str, std::ostream& oStream = cout);
+        void outputAssemblyFloatIntLiterals(std::string str, std::ostream& oStream = cout);
+ 
+        
+        
 	// generate the assembly code from our AST.
-	void generateAssembly(ostream& out = cout);
+	void outputAssembly(ostream& oStream = cout);
 
-	// This makes sure that an int will get declared in the assembly which is generated.
+        
+        std::string generateAssemblyStrLoop();
+        std::string generateAssemblyStrDone();
+        
+        std::string generateAssemblyStrIntLiteral(std::string &str);
+        // This makes sure that an int will get declared in the assembly which is generated.
 	// You may provide an initial value for the int, but the default value is 0.
 	// The method returns the label where the int is stored.
-	string declareInt32(string initialValue = "0");
+        std::string generateAssemblyInt32IntLiteral(std::string &int32 = "0");
+        std::string generateAssemblyFloatIntLiteral(std::string &fl = "0.0");
+        
+        
 
-	//string declareData();
-
-	void generateDeclaredInt32s(ostream& out = cout);
+        
 
 	void printTree();
-
 	void getNextIdentifier(Node* curr, string*& id);
-
-	void generateAssemblyFromSubtree(Node* curSubtree, ostream& out);
+	void generateAssemblyFromSubtree(Node* curSubtree, std::ostream& out);
 
 private:
     
-        vector<std::string> declaredStrings;
+        vector<std::string> strIntLiterals;
+        vector<std::string> int32IntLiterals;       // each int32's value is stored as a string.
+        vector<std::string> floatIntLiterals;       // each float's value is stored as a string.
     
-    
+        
 	Node* parseTreeRoot;
 
 	int numDeclaredInt32s = 0;
-	vector<string> declaredInt32s; // each int32's value is stored as a string.
+	
         
         
 };
