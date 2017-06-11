@@ -24,6 +24,112 @@ CodeGenerator::CodeGenerator(const CodeGenerator& orig) {
 CodeGenerator::~CodeGenerator() {
 }
 
+
+
+
+std::string CodeGenerator::generateAssemblyCodeForStringIntL(std::string str)
+{   
+    int currentVectorIndex = declaredStrings.size() + 1;
+    
+    stringstream ss;
+    ss << "string_" << currentVectorIndex;
+    std::string label = ss.str();
+    
+    ss.str("");
+    
+    ss << label << ":\n";
+            
+    
+    for (int i = 0; i < str.length(); i++)
+    {
+        ss << "\tint_literal " << (int)str[i] << "\n";
+    }
+            
+    
+    // # null
+    ss << "\tint_literal 0\n";
+    
+    
+    declaredStrings.push_back(ss.str());
+    
+    return label;
+}
+
+
+std::string CodeGenerator::getAssemblyCodeForAllStringsIntL()
+{
+    stringstream ss;
+    
+    for (int i = 0; i < declaredStrings.size(); i++)
+    {
+        ss << declaredStrings.at(i) << "\n"; 
+    }
+    
+    
+    return ss.str();
+}
+
+
+std::string CodeGenerator::generateAssemblyCodeForStringLoop()
+{
+    stringstream ss;
+    
+    // # copy address and load character pointed
+    ss << "printString:\n";
+    ss << "printString_loop:\n";
+    ss << "\tdup\n";
+    ss << "\tload_mem_int\n";
+    
+    ss << "\n";
+    
+    // # done if character is 0 (string terminator)
+    ss << "\tdup\n";
+    ss << "\tload_label printString_done\n";
+    ss << "\tbranch_zero\n";
+    
+    ss << "\n";
+        
+    // # otherwise, print character
+    ss << "\tprint_byte\n";
+            
+    
+    ss << "\n";
+    
+    
+    //  # increment the string pointer to get next character
+    ss << "\tload1\n";
+    ss << "\tadd\n";
+    
+    
+    ss << "\n";
+    
+    // # and repeat
+    ss << "\tload_label printString_loop\n";
+    ss << "\tbranch\n";
+    
+    ss << "printString_done:\n";
+    
+    ss << "\treturn\n";
+    
+    
+    return ss.str();
+}
+
+
+std::string CodeGenerator::generateAssemblyCodeForStringDone() 
+{
+    stringstream ss;
+    
+    ss << "done:\n";
+    ss << "\tload0\n";
+    ss << "\texit\n";
+    
+    return ss.str();
+}
+
+
+
+
 void CodeGenerator::importParseTree(Node* treeRoot) {
 	parseTreeRoot = treeRoot;
 }
@@ -44,7 +150,7 @@ void CodeGenerator::generateDeclaredInt32s(ostream& out) {
 	for (int i = 0; i < declaredInt32s.size(); i++) {
 		currentLabelNumber = i + 1;
 		out << "int32_" + to_string(currentLabelNumber) << ":" << endl;
-		out << "\t\t" << "int_literal " << declaredInt32s[i] << endl;
+		out << "\t" << "int_literal " << declaredInt32s[i] << endl;
 	}
 }
 
@@ -99,8 +205,8 @@ void CodeGenerator::generateAssemblyFromSubtree(Node* curSubtree, ostream& out) 
 		switch (curTokenClass) {
 		case INTEGER:
 			label = declareInt32(curNode->token.getTokenText());
-			out << "\t\t" << "load_label " << label << endl;
-			out << "\t\t" << "load_mem_int" << endl;
+			out << "\t" << "load_label " << label << endl;
+			out << "\t" << "load_mem_int" << endl;
 			break;
 
 		case STRING_LITERAL:
