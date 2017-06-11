@@ -25,44 +25,31 @@ CodeGenerator::~CodeGenerator() {
 }
 
 
-
-
-std::string CodeGenerator::generateAssemblyCodeForStringIntL(std::string str)
-{   
-    int currentVectorIndex = declaredStrings.size() + 1;
-    
-    stringstream ss;
-    ss << "string_" << currentVectorIndex;
-    std::string label = ss.str();
-    
-    ss.str("");
-    
-    ss << label << ":\n";
-            
-    
-    for (int i = 0; i < str.length(); i++)
-    {
-        ss << "\tint_literal " << (int)str[i] << "\n";
-    }
-            
-    
-    // # null
-    ss << "\tint_literal 0\n";
-    
-    
-    declaredStrings.push_back(ss.str());
-    
-    return label;
+void CodeGenerator::importParseTree(Node* treeRoot) {
+	parseTreeRoot = treeRoot;
 }
 
 
-std::string CodeGenerator::getAssemblyCodeForAllStringsIntL()
+std::string CodeGenerator::getAllAssemblyStrIntLiterals()
 {
     stringstream ss;
     
-    for (int i = 0; i < declaredStrings.size(); i++)
+    for (int i = 0; i < strIntLiterals.size(); i++)
     {
-        ss << declaredStrings.at(i) << "\n"; 
+        ss << strIntLiterals.at(i) << "\n"; 
+    }
+    
+    
+    return ss.str();
+}
+
+std::string CodeGenerator::getAllAssemblyInt32IntLiterals() 
+{
+    stringstream ss;
+    
+    for (int i = 0; i < int32IntLiterals.size(); i++)
+    {
+        ss << strIntLiterals.at(i) << "\n"; 
     }
     
     
@@ -70,7 +57,49 @@ std::string CodeGenerator::getAssemblyCodeForAllStringsIntL()
 }
 
 
-std::string CodeGenerator::generateAssemblyCodeForStringLoop()
+std::string CodeGenerator::getAllAssemblyFloatInterLiterals()
+{
+    stringstream ss;
+    
+    for (int i = 0; i < floatIntLiterals.size(); i++)
+    {
+        ss << floatIntLiterals.at(i) << "\n"; 
+    }
+    
+    
+    return ss.str();   
+}
+
+
+void CodeGenerator::outputAssemblyStrIntLiterals(std::string str, std::ostream& oStream)
+{
+    oStream << generateAssemblyStrIntLiteral(str);
+}
+
+
+void CodeGenerator::outputAssemblyInt32IntLiterals(std::string str, std::ostream& oStream)
+{
+    oStream << generateAssemblyInt32IntLiteral(str);
+}
+
+
+void CodeGenerator::outputAssemblyFloatIntLiterals(std::string str, std::ostream& oStream)
+{
+    oStream << generateAssemblyFloatIntLiteral(str);
+}
+
+
+void CodeGenerator::outputAssembly(std::string str, std::ostream& oStream) {
+
+    generateAssemblyFromSubtree(parseTreeRoot, oStream);
+
+    outputAssemblyStrIntLiterals(str, oStream);
+    outputAssemblyInt32IntLiterals(str, oStream);
+    outputAssemblyFloatIntLiterals(str, oStream);       
+}
+
+
+std::string CodeGenerator::generateAssemblyStrLoop()
 {
     stringstream ss;
     
@@ -116,7 +145,7 @@ std::string CodeGenerator::generateAssemblyCodeForStringLoop()
 }
 
 
-std::string CodeGenerator::generateAssemblyCodeForStringDone() 
+std::string CodeGenerator::generateAssemblyStrDone() 
 {
     stringstream ss;
     
@@ -130,36 +159,120 @@ std::string CodeGenerator::generateAssemblyCodeForStringDone()
 
 
 
-void CodeGenerator::importParseTree(Node* treeRoot) {
-	parseTreeRoot = treeRoot;
+std::string CodeGenerator::generateAssemblyStrIntLiteral(std::string& str)
+{   
+    int currentVectorIndex = strIntLiterals.size() + 1;
+    
+    stringstream ss;
+    ss << "string_" << currentVectorIndex;
+    std::string label = ss.str();
+    
+    ss.str("");
+    
+    ss << label << ":\n";
+            
+    
+    for (int i = 0; i < str.length(); i++)
+    {
+        ss << "\tint_literal " << (int)str[i] << "\n";
+    }
+            
+    
+    // # null
+    ss << "\tint_literal 0\n";
+    
+    
+    strIntLiterals.push_back(ss.str());
+    
+    return label;
 }
 
+
 // the default initialValue is zero.
-string CodeGenerator::declareInt32(string initialValue){
+std::string CodeGenerator::generateAssemblyInt32IntLiteral(std::string& int32){
 	numDeclaredInt32s++;
 
-	declaredInt32s.push_back(initialValue);
+	int32IntLiterals.push_back(int32);
 
 	return "int32_" + to_string(numDeclaredInt32s);
 
 }
 
+
+std::string CodeGenerator::generateAssemblyFloatIntLiteral(std::string& fl)
+{
+    
+}
+
+
+
+void CodeGenerator::outputAssemblyStrIntLiterals(std::string str, std::ostream& oStream)
+{
+    stringstream ss;
+    
+    ss << "\tload_label " << 
+        generateAssemblyStrIntLiteral("Hi Reza! You are the shit today!");// returns label
+          
+    ss << "\n\tload_label printString";
+    ss << "\n\tcall\n\n";
+
+        
+    ss << "\tload_label " << 
+        generateAssemblyInt32IntLiteral("6pm? Or tomorrow 10am? 10am!!!! Please!");// returns label
+        
+    ss << "\n\tload_label printString";
+    ss << "\n\tcall\n\n";
+        
+        
+        
+    ss << "\tload_label done\n";
+    ss << "\tbranch\n";
+        
+    ss << "\n\n";
+        
+        
+    ss << generateAssemblyStrLoop();        // returns loop
+        
+    ss << "\n\n";
+        
+        
+    ss << generateAssemblyStrDone();        // returns done
+        
+        
+    ss << "\n\n";
+        
+        
+    ss << getAllAssemblyStrIntLiterals();         // returns allStrings
+        
+        
+    ss << "\n\n";
+
+    
+    oStream << ss;
+}
+
+
 // output defaults to cout.
-void CodeGenerator::generateDeclaredInt32s(ostream& out) {
+void CodeGenerator::outputAssemblyInt32IntLiterals(std::ostream& oStream) {
 	int currentLabelNumber = 0;
-	for (int i = 0; i < declaredInt32s.size(); i++) {
+	for (int i = 0; i < int32IntLiterals.size(); i++) {
 		currentLabelNumber = i + 1;
-		out << "int32_" + to_string(currentLabelNumber) << ":" << endl;
-		out << "\t" << "int_literal " << declaredInt32s[i] << endl;
+		oStream << "int32_" + to_string(currentLabelNumber) << ":" << endl;
+		oStream << "\t" << "int_literal " << int32IntLiterals[i] << endl;
 	}
 }
 
-void CodeGenerator::generateAssembly(ostream& out) {
 
-	generateAssemblyFromSubtree(parseTreeRoot, out);
-
-	generateDeclaredInt32s(out);
+void CodeGenerator::outputAssemblyFloatIntLiterals(std::ostream& oStream)
+{
+    
 }
+
+
+
+
+
+
 
 void CodeGenerator::getNextIdentifier(Node* curr, string*& id) {
 	
@@ -179,7 +292,7 @@ void CodeGenerator::getNextIdentifier(Node* curr, string*& id) {
 	return;
 }
 
-void CodeGenerator::generateAssemblyFromSubtree(Node* curSubtree, ostream& out) {
+void CodeGenerator::generateAssemblyFromSubtree(Node* curSubtree, std::ostream& out) {
 	
 	Node* curNode = curSubtree;
 	
@@ -204,7 +317,7 @@ void CodeGenerator::generateAssemblyFromSubtree(Node* curSubtree, ostream& out) 
 
 		switch (curTokenClass) {
 		case INTEGER:
-			label = declareInt32(curNode->token.getTokenText());
+			label = generateAssemblyInt32IntLiteral(curNode->token.getTokenText());
 			out << "\t" << "load_label " << label << endl;
 			out << "\t" << "load_mem_int" << endl;
 			break;

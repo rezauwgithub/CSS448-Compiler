@@ -51,48 +51,15 @@ int main(int argc, char** argv) {
 	gen.printTree();
 	cout << "---- Done ---" << endl;
 
+        
 	cout << "---- ASSEMBLY CODE ----" << endl;
         
         
         
-        
-        cout << "\tload_label " << 
-                gen.generateAssemblyCodeForStringIntL("Hi Reza! You are the shit today!");// returns label
-         
-        
-        cout << "\n\tload_label printString";
-        cout << "\n\tcall\n\n";
-
-        
-        cout << "\tload_label " << 
-                gen.generateAssemblyCodeForStringIntL("6pm? Or tomorrow 10am? 10am!!!! Please!");// returns label
-        
-        cout << "\n\tload_label printString";
-        cout << "\n\tcall\n\n";
+        gen.generateAssemblyStrIntLiteral("Reza");
+        gen.outputAssemblyStrIntLiterals(std::cout);
         
         
-        
-        cout << "\tload_label done\n";
-        cout << "\tbranch\n";
-        
-        cout << "\n\n";
-        
-        
-        cout << gen.generateAssemblyCodeForStringLoop();        // returns loop
-        
-        cout << "\n\n";
-        
-        
-        cout << gen.generateAssemblyCodeForStringDone();        // returns done
-        
-        
-        cout << "\n\n";
-        
-        
-        cout << gen.getAssemblyCodeForAllStringsIntL();         // returns allStrings
-        
-        
-        cout << "\n\n";
         
         
 	// gen.generateAssembly(cout);
