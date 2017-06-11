@@ -17,12 +17,21 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <sstream>
 
 class CodeGenerator {
 public:
     CodeGenerator();
     CodeGenerator(const CodeGenerator& orig);
     virtual ~CodeGenerator();
+        
+    
+        std::string generateAssemblyCodeForStringIntL(std::string str);
+        std::string getAssemblyCodeForAllStringsIntL();
+        std::string generateAssemblyCodeForStringLoop();
+        std::string generateAssemblyCodeForStringDone();
+        
+        
 
 	void importParseTree(Node* treeRoot);
 
@@ -45,11 +54,16 @@ public:
 	void generateAssemblyFromSubtree(Node* curSubtree, ostream& out);
 
 private:
+    
+        vector<std::string> declaredStrings;
+    
+    
 	Node* parseTreeRoot;
 
 	int numDeclaredInt32s = 0;
 	vector<string> declaredInt32s; // each int32's value is stored as a string.
-	//vector<string> declaredStrings; // each int32's value is stored as a string.
+        
+        
 };
 
 #endif /* CODEGENERATOR_H */

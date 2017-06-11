@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
 
     Lexer lex(myFilePath);
 
-
+        
 
 	Parser parser;
 	parser.parseTokens(lex.getTokens());
@@ -52,7 +52,50 @@ int main(int argc, char** argv) {
 	cout << "---- Done ---" << endl;
 
 	cout << "---- ASSEMBLY CODE ----" << endl;
-	gen.generateAssembly(cout);
+        
+        
+        
+        
+        cout << "\tload_label " << 
+                gen.generateAssemblyCodeForStringIntL("Hi Reza! You are the shit today!");// returns label
+         
+        
+        cout << "\n\tload_label printString";
+        cout << "\n\tcall\n\n";
+
+        
+        cout << "\tload_label " << 
+                gen.generateAssemblyCodeForStringIntL("6pm? Or tomorrow 10am? 10am!!!! Please!");// returns label
+        
+        cout << "\n\tload_label printString";
+        cout << "\n\tcall\n\n";
+        
+        
+        
+        cout << "\tload_label done\n";
+        cout << "\tbranch\n";
+        
+        cout << "\n\n";
+        
+        
+        cout << gen.generateAssemblyCodeForStringLoop();        // returns loop
+        
+        cout << "\n\n";
+        
+        
+        cout << gen.generateAssemblyCodeForStringDone();        // returns done
+        
+        
+        cout << "\n\n";
+        
+        
+        cout << gen.getAssemblyCodeForAllStringsIntL();         // returns allStrings
+        
+        
+        cout << "\n\n";
+        
+        
+	// gen.generateAssembly(cout);
 
 	//gen.declareInt32("3");
 	//gen.declareInt32("6");
