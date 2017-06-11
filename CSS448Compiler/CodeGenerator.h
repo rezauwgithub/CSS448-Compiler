@@ -37,26 +37,27 @@ public:
         std::string getAllAssemblyInt32IntLiterals();
         std::string getAllAssemblyFloatInterLiterals();
         
+        void preOutputAssemblyStr(std::string str, std::ostream& oStream);
         
-        void outputAssemblyStrIntLiterals(std::string str, std::ostream& oStream = cout);
-	void outputAssemblyInt32IntLiterals(std::string str, std::ostream& oStream = cout);
-        void outputAssemblyFloatIntLiterals(std::string str, std::ostream& oStream = cout);
+        void outputAssemblyStrIntLiterals(std::string str, std::ostream& oStream);
+	void outputAssemblyInt32IntLiterals(std::string str, std::ostream& oStream);
+        void outputAssemblyFloatIntLiterals(std::string str, std::ostream& oStream);
  
         
         
 	// generate the assembly code from our AST.
-	// void outputAssembly(ostream& oStream = cout);
+	void outputAssembly(std::string str, std::ostream& oStream = cout);
 
         
         std::string generateAssemblyStrLoop();
         std::string generateAssemblyStrDone();
         
-        std::string generateAssemblyStrIntLiteral(std::string &str);
+        std::string generateAssemblyStrIntLiteral(std::string str);
         // This makes sure that an int will get declared in the assembly which is generated.
 	// You may provide an initial value for the int, but the default value is 0.
 	// The method returns the label where the int is stored.
-        //std::string generateAssemblyInt32IntLiteral(std::string &int32 = "0");
-        // std::string generateAssemblyFloatIntLiteral(std::string &fl = "0.0");
+        std::string generateAssemblyInt32IntLiteral(std::string int32);
+        std::string generateAssemblyFloatIntLiteral(std::string fl);
         
         
 
@@ -64,7 +65,7 @@ public:
 
 	void printTree();
 	void getNextIdentifier(Node* curr, string*& id);
-	void generateAssemblyFromSubtree(Node* curSubtree, std::ostream& out);
+	void generateAssemblyFromSubtree(Node* curSubtree, std::ostream& oStream);
 
 private:
     
