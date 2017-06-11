@@ -45,7 +45,7 @@ public:
         
         
 	// generate the assembly code from our AST.
-	void outputAssembly(ostream& oStream = cout);
+	// void outputAssembly(ostream& oStream = cout);
 
         
         std::string generateAssemblyStrLoop();
@@ -55,8 +55,8 @@ public:
         // This makes sure that an int will get declared in the assembly which is generated.
 	// You may provide an initial value for the int, but the default value is 0.
 	// The method returns the label where the int is stored.
-        std::string generateAssemblyInt32IntLiteral(std::string &int32 = "0");
-        std::string generateAssemblyFloatIntLiteral(std::string &fl = "0.0");
+        //std::string generateAssemblyInt32IntLiteral(std::string &int32 = "0");
+        // std::string generateAssemblyFloatIntLiteral(std::string &fl = "0.0");
         
         
 
