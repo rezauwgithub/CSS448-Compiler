@@ -40,6 +40,8 @@ public:
 
 	void printTree();
 
+	void getNextIdentifier(Node* curr, string*& id);
+
 	void generateAssemblyFromSubtree(Node* curSubtree, ostream& out);
 
 private:

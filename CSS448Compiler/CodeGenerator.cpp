@@ -55,6 +55,24 @@ void CodeGenerator::generateAssembly(ostream& out) {
 	generateDeclaredInt32s(out);
 }
 
+void CodeGenerator::getNextIdentifier(Node* curr, string*& id) {
+	
+	if (curr->token.getTokenClass() == IDENTIFIER) {
+		id = new string(curr->token.getTokenText());
+		return;
+	}
+	
+	if (curr->children.empty()) {
+		return;
+	}
+	else {
+		for (int i = 0; i < curr->children.size(); i++) {
+			getNextIdentifier(curr->children[i], id);
+		}
+	}
+	return;
+}
+
 void CodeGenerator::generateAssemblyFromSubtree(Node* curSubtree, ostream& out) {
 	
 	Node* curNode = curSubtree;
@@ -65,6 +83,7 @@ void CodeGenerator::generateAssemblyFromSubtree(Node* curSubtree, ostream& out) 
 	for (int i = 0; i < curNode->children.size(); i++) {
 		generateAssemblyFromSubtree(curNode->children[i], out);
 	}
+
 
 	// generate assembly for the current node
 
