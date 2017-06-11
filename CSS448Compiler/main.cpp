@@ -69,12 +69,14 @@ int main(int argc, char** argv) {
         
 	// gen.generateAssembly(cout);
 
-	//gen.declareInt32("3");
-	//gen.declareInt32("6");
-	//gen.declareInt32("2");
-	//gen.declareInt32("123");
-	//gen.declareInt32("90");
-	//gen.generateDeclaredInt32s();
+        
+        
+	gen.outputAssemblyInt32IntLiterals("3", cout);
+	gen.outputAssemblyInt32IntLiterals("6", cout);
+	gen.outputAssemblyInt32IntLiterals("2", cout);
+	gen.outputAssemblyInt32IntLiterals("123", cout);
+	gen.outputAssemblyInt32IntLiterals("90", cout);
+        
 
     return 0;
 }

@@ -37,7 +37,7 @@ public:
         std::string getAllAssemblyInt32IntLiterals();
         std::string getAllAssemblyFloatInterLiterals();
         
-        void preOutputAssemblyStr(std::string str, std::ostream& oStream);
+        std::string preOutputAssemblyStr(std::string str, std::ostream& oStream);
         
         void outputAssemblyStrIntLiterals(std::string str, std::ostream& oStream);
 	void outputAssemblyInt32IntLiterals(std::string str, std::ostream& oStream);

@@ -74,12 +74,21 @@ std::string CodeGenerator::getAllAssemblyFloatInterLiterals()
 }
 
 
-void CodeGenerator::preOutputAssemblyStr(std::string str, std::ostream& oStream)
+std::string CodeGenerator::preOutputAssemblyStr(std::string str, std::ostream& oStream)
 {
-    stringstream ss;
+    int currentVectorIndex = strIntLiterals.size() + 1;
     
-    ss << "\tload_label " << 
-    ss << generateAssemblyStrIntLiteral(str);// returns label
+    stringstream ss;
+    ss << "string_" << currentVectorIndex;
+    std::string label = ss.str();
+    
+    ss.str("");
+    
+    ss << label << ":\n";
+      
+    generateAssemblyStrIntLiteral(str);
+    
+    ss << "\tload_label ";
           
     ss << "\n\tload_label printString";
     ss << "\n\tcall\n\n";
@@ -104,6 +113,8 @@ void CodeGenerator::preOutputAssemblyStr(std::string str, std::ostream& oStream)
     ss << "\n\n";
     
     oStream << ss.str();
+    
+    return label;
 }
 
 
@@ -111,7 +122,7 @@ void CodeGenerator::outputAssemblyStrIntLiterals(std::string str, std::ostream& 
 {
     stringstream ss;
         
-    ss << generateAssemblyStrIntLiteral(str);// returns label
+    ss << str;     // returns label
     ss << getAllAssemblyStrIntLiterals();         // returns allStrings
         
         
@@ -137,7 +148,7 @@ void CodeGenerator::outputAssemblyInt32IntLiterals(std::string str, std::ostream
         ss << "\t" << "int_literal " << int32IntLiterals[i] << "\n";
     }
         
-    oStream << ss;
+    oStream << ss.str();
 }
 
 
