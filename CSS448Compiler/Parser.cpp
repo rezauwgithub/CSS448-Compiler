@@ -1282,7 +1282,13 @@ bool Parser::Additional_Expression_11(Node* Parent) {
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
 	if (result == true) {
-		if (cur->children.size() > 0) {
+		if (cur->children.size() == 2) {
+			Parent->children.push_back(cur->children[0]->copySubtree());
+			Parent->children.push_back(cur->children[1]->copySubtree());
+			cur->children.pop_back();
+			cur->children.pop_back();
+		}
+		else if (cur->children.size() > 0) {
 			Parent->children.push_back(cur);
 		}
 	}
@@ -1309,7 +1315,13 @@ bool Parser::Additional_Expression_10(Node* Parent) {
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
 	if (result == true) {
-		if (cur->children.size() > 0) {
+		if (cur->children.size() == 2) {
+			Parent->children.push_back(cur->children[0]->copySubtree());
+			Parent->children.push_back(cur->children[1]->copySubtree());
+			cur->children.pop_back();
+			cur->children.pop_back();
+		}
+		else if (cur->children.size() > 0) {
 			Parent->children.push_back(cur);
 		}
 	}
@@ -1336,7 +1348,13 @@ bool Parser::Additional_Expression_9(Node* Parent) {
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
 	if (result == true) {
-		if (cur->children.size() > 0) {
+		if (cur->children.size() == 2) {
+			Parent->children.push_back(cur->children[0]->copySubtree());
+			Parent->children.push_back(cur->children[1]->copySubtree());
+			cur->children.pop_back();
+			cur->children.pop_back();
+		}
+		else if (cur->children.size() > 0) {
 			Parent->children.push_back(cur);
 		}
 	}
@@ -1363,7 +1381,13 @@ bool Parser::Additional_Expression_8(Node* Parent) { // TODO: this is the "^" op
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
 	if (result == true) {
-		if (cur->children.size() > 0) {
+		if (cur->children.size() == 2) {
+			Parent->children.push_back(cur->children[0]->copySubtree());
+			Parent->children.push_back(cur->children[1]->copySubtree());
+			cur->children.pop_back();
+			cur->children.pop_back();
+		}
+		else if (cur->children.size() > 0) {
 			Parent->children.push_back(cur);
 		}
 	}
@@ -1390,7 +1414,13 @@ bool Parser::Additional_Expression_7(Node* Parent) {
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
 	if (result == true) {
-		if (cur->children.size() > 0) {
+		if (cur->children.size() == 2) {
+			Parent->children.push_back(cur->children[0]->copySubtree());
+			Parent->children.push_back(cur->children[1]->copySubtree());
+			cur->children.pop_back();
+			cur->children.pop_back();
+		}
+		else if (cur->children.size() > 0) {
 			Parent->children.push_back(cur);
 		}
 	}
@@ -1418,7 +1448,13 @@ bool Parser::Additional_Expression_6(Node* Parent) {
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
 	if (result == true) {
-		if (cur->children.size() > 0) {
+		if (cur->children.size() == 2) {
+			Parent->children.push_back(cur->children[0]->copySubtree());
+			Parent->children.push_back(cur->children[1]->copySubtree());
+			cur->children.pop_back();
+			cur->children.pop_back();
+		}
+		else if (cur->children.size() > 0) {
 			Parent->children.push_back(cur);
 		}
 	}
@@ -1448,7 +1484,13 @@ bool Parser::Additional_Expression_5(Node* Parent) {
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
 	if (result == true) {
-		if (cur->children.size() > 0) {
+		if (cur->children.size() == 2) {
+			Parent->children.push_back(cur->children[0]->copySubtree());
+			Parent->children.push_back(cur->children[1]->copySubtree());
+			cur->children.pop_back();
+			cur->children.pop_back();
+		}
+		else if (cur->children.size() > 0) {
 			Parent->children.push_back(cur);
 		}
 	}
@@ -1476,7 +1518,13 @@ bool Parser::Additional_Expression_4(Node* Parent) {
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
 	if (result == true) {
-		if (cur->children.size() > 0) {
+		if (cur->children.size() == 2) {
+			Parent->children.push_back(cur->children[0]->copySubtree());
+			Parent->children.push_back(cur->children[1]->copySubtree());
+			cur->children.pop_back();
+			cur->children.pop_back();
+		}
+		else if (cur->children.size() > 0) {
 			Parent->children.push_back(cur);
 		}
 	}
@@ -1504,7 +1552,13 @@ bool Parser::Additional_Expression_3(Node* Parent) {
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
 	if (result == true) {
-		if (cur->children.size() > 0) {
+		if (cur->children.size() == 2) {
+			Parent->children.push_back(cur->children[0]->copySubtree());
+			Parent->children.push_back(cur->children[1]->copySubtree());
+			cur->children.pop_back();
+			cur->children.pop_back();
+		}
+		else if (cur->children.size() > 0) {
 			Parent->children.push_back(cur);
 		}
 	}
@@ -1532,7 +1586,13 @@ bool Parser::Additional_Expression_2(Node* Parent) {
 		(nextToken = save, (cur->deleteChildren() || (Additional_Expression_END(cur))))
 		) || (cur->deleteChildren()));
 	if (result == true) {
-		if (cur->children.size() > 0) {
+		if (cur->children.size() == 2) {
+			Parent->children.push_back(cur->children[0]->copySubtree());
+			Parent->children.push_back(cur->children[1]->copySubtree());
+			cur->children.pop_back();
+			cur->children.pop_back();
+		}
+		else if (cur->children.size() > 0) {
 			Parent->children.push_back(cur);
 		}
 	}
