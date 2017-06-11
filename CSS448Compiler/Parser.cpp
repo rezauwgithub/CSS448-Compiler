@@ -35,7 +35,15 @@ void Parser::parseTokens(std::vector<Token> tokens) {
 }
 
 void Parser::SimplifyTree(Node* cur) {
+	while ((cur->children.size() == 1) && (cur->children[0]->children.size() == 1)) {
+		cur->children[0] = cur->children[0]->children[0];
+	}
+	for (int i = 0; i < cur->children.size(); i++) {
 
+	}
+	for (int i = 0; i < cur->children.size(); i++) {
+		SimplifyTree(cur->children[i]);
+	}
 }
 
 void Parser::readInTokens(std::vector<Token> tokens) {
