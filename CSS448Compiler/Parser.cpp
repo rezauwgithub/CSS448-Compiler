@@ -18,6 +18,10 @@ using namespace std;
 Parser::Parser() {
 }
 
+Node* Parser::getASTroot(){
+	return parseTreeRoot;
+}
+
 void Parser::parseTokens(std::vector<Token> tokens) {
 	readInTokens(tokens);
 	nextToken = this->tokens.begin();

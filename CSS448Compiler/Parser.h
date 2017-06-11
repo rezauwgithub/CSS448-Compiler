@@ -32,6 +32,8 @@ private:
 	std::vector<Token>::iterator nextToken;
 	Node*   parseTreeRoot;
 
+	Node* getASTroot();
+
 	void readInTokens(std::vector<Token>);
 
     /**********************/
