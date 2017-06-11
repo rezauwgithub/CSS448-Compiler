@@ -76,7 +76,7 @@ private:
         
 	Node* parseTreeRoot;
 
-	int numDeclaredInt32s = 0;
+	static int numDeclaredInt32s;
 	
         
         

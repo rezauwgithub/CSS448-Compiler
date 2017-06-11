@@ -56,8 +56,13 @@ int main(int argc, char** argv) {
         
         
         
-        gen.generateAssemblyStrIntLiteral("Reza");
-        gen.outputAssemblyStrIntLiterals(std::cout);
+        
+        gen.preOutputAssemblyStr("Reza", cout);
+        
+        gen.outputAssemblyStrIntLiterals("Reza", cout);
+        gen.outputAssemblyStrIntLiterals("Daniel", cout);
+        gen.outputAssemblyStrIntLiterals("Folsom", cout);
+        gen.outputAssemblyStrIntLiterals("Morris", cout);
         
         
         

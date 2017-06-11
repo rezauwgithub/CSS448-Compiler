@@ -13,6 +13,9 @@
 
 #include "CodeGenerator.h"
 
+int CodeGenerator::numDeclaredInt32s = 0;
+
+
 CodeGenerator::CodeGenerator() {
 	numDeclaredInt32s = 0;
 
